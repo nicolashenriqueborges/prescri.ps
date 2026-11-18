@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alta PS — receitas e orientações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F6F8FB; --ink:#101A2B; --muted:#5A6676; --faint:#8A95A5; --line:#DCE2EA; --line-2:#E8ECF1;
+  --accent:#1E4FD0; --accent-ink:#FFFFFF; --accent-weak:#E7EEFD; --accent-line:#BBCCF5;
+  --warn:#8A4B00; --warn-weak:#FDF1DD; --danger:#A6261A; --danger-weak:#FCE9E6; --ok:#0B6B4C; --ok-weak:#E2F4EC;
+  --paper:#FFFFFF; --paper-rule:#EEF2F8; --shadow:0 1px 2px rgba(16,26,43,.06),0 8px 24px rgba(16,26,43,.06);
+  --ui:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C111B; --surface:#141B27; --surface-2:#19212F; --ink:#E6EBF2; --muted:#9AA6B6; --faint:#6E7A8B; --line:#263142; --line-2:#1F2836;
+    --accent:#7FA2FF; --accent-ink:#0C111B; --accent-weak:#1A2643; --accent-line:#2F4579;
+    --warn:#F2B866; --warn-weak:#2E2414; --danger:#FF8F82; --danger-weak:#36191A; --ok:#5ED3A4; --ok-weak:#123026;
+    --paper:#10161F; --paper-rule:#18202C; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C111B; --surface:#141B27; --surface-2:#19212F; --ink:#E6EBF2; --muted:#9AA6B6; --faint:#6E7A8B; --line:#263142; --line-2:#1F2836;
+  --accent:#7FA2FF; --accent-ink:#0C111B; --accent-weak:#1A2643; --accent-line:#2F4579;
+  --warn:#F2B866; --warn-weak:#2E2414; --danger:#FF8F82; --danger-weak:#36191A; --ok:#5ED3A4; --ok-weak:#123026;
+  --paper:#10161F; --paper-rule:#18202C; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Layout */
+.shell{display:flex;flex-direction:column;height:100%}
+header.top{display:flex;align-items:center;gap:16px;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;flex:none}
+.rx-mark{width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif;font-size:21px;font-weight:700;line-height:1}
+.brand b{font-size:17px;letter-spacing:-.01em;display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:12px;display:block}
+.search{flex:1;position:relative;max-width:640px}
+.search input{width:100%;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);padding:0 44px 0 42px;font-size:16px;outline:none;transition:border-color .15s,background .15s}
+.search input:focus{border-color:var(--accent);background:var(--surface)}
+.search svg{position:absolute;left:13px;top:12px;width:20px;height:20px;color:var(--faint)}
+.search kbd{position:absolute;right:10px;top:10px}
+kbd{font-family:var(--mono);font-size:11px;padding:2px 6px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;color:var(--muted);background:var(--surface)}
+.top-tools{display:flex;align-items:center;gap:8px;flex:none}
+.switch{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);user-select:none;cursor:pointer;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+.switch input{appearance:none;width:30px;height:18px;border-radius:99px;background:var(--line);position:relative;margin:0;cursor:pointer;transition:background .15s}
+.switch input::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .15s}
+.switch input:checked{background:var(--accent)}
+.switch input:checked::after{transform:translateX(12px)}
+
+main.cols{flex:1;display:grid;grid-template-columns:300px minmax(0,1fr) minmax(400px,480px);min-height:0}
+.col{min-height:0;overflow:auto}
+.col-list{border-right:1px solid var(--line);background:var(--surface)}
+.col-detail{padding:28px 32px 120px}
+.col-out{border-left:1px solid var(--line);background:var(--surface-2);padding:20px 20px 40px}
+
+/* List */
+.list{padding:10px 10px 40px}
+.list h3{font-size:12px;font-weight:600;color:var(--faint);margin:18px 10px 6px;letter-spacing:.01em}
+.list h3:first-child{margin-top:6px}
+.li{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;border:0;background:none;padding:8px 10px;border-radius:9px;color:var(--ink);font-size:14.5px;line-height:1.3;position:relative}
+.li:hover{background:var(--surface-2)}
+.li .cid{margin-left:auto;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.li[aria-current="true"]{background:var(--accent-weak);color:var(--ink)}
+.li[aria-current="true"]::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--accent)}
+.li.kb{box-shadow:inset 0 0 0 1.5px var(--accent-line)}
+.li .star{color:var(--warn);font-size:12px}
+.empty-list{padding:24px 14px;color:var(--muted);font-size:14px}
+
+/* Detail */
+.back{display:none}
+.d-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.d-head h1{font-size:28px;line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:650;flex:1;text-wrap:balance}
+.iconbtn{border:1px solid var(--line);background:var(--surface);border-radius:10px;width:38px;height:38px;display:grid;place-items:center;color:var(--muted);flex:none}
+.iconbtn:hover{color:var(--ink)}
+.iconbtn[aria-pressed="true"]{color:var(--warn);border-color:var(--warn);background:var(--warn-weak)}
+.d-sys{color:var(--muted);font-size:13.5px;margin-bottom:14px}
+.cids{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.cidchip{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:5px 9px;font-size:13px;display:flex;gap:7px;align-items:baseline}
+.cidchip b{font-variant-numeric:tabular-nums}
+.cidchip span{color:var(--muted)}
+.cidchip[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-weak)}
+.banner{border-radius:12px;padding:11px 14px;font-size:13.5px;margin:0 0 14px;display:flex;gap:10px;align-items:flex-start}
+.banner.fix{background:var(--warn-weak);color:var(--warn)}
+.banner.added{background:var(--danger-weak);color:var(--danger)}
+.banner svg{flex:none;width:16px;height:16px;margin-top:2px}
+
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:22px}
+.seg button{border:0;background:none;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+
+section.blk{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-bottom:16px;overflow:hidden}
+.blk-h{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line-2)}
+.blk-h h2{font-size:15px;margin:0;font-weight:650}
+.blk-h .count{font-size:12.5px;color:var(--muted)}
+.blk-h .sp{flex:1}
+.textbtn{border:0;background:none;color:var(--accent);font-size:13px;font-weight:600;padding:4px 6px;border-radius:6px}
+.textbtn:hover{background:var(--accent-weak)}
+
+.rx{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 14px;align-items:start;padding:14px 18px;border-top:1px solid var(--line-2);cursor:pointer}
+.rx:first-child{border-top:0}
+.rx.off .rx-main{opacity:.55}
+.cb{appearance:none;width:22px;height:22px;border-radius:7px;border:1.5px solid var(--faint);margin:1px 0 0;display:grid;place-items:center;background:var(--surface);cursor:pointer;transition:background .12s,border-color .12s}
+.cb::after{content:"";width:6px;height:11px;border:solid var(--accent-ink);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
+.cb:checked{background:var(--accent);border-color:var(--accent)}
+.cb:checked::after{opacity:1}
+.rx-name{font-weight:600;font-size:15px;line-height:1.3}
+.rx-pos{color:var(--muted);font-size:14px;margin-top:3px}
+.tags{display:inline-flex;gap:5px;flex-wrap:wrap;margin-left:6px;vertical-align:2px}
+.tag{font-size:11px;font-weight:600;padding:2px 7px;border-radius:99px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line);white-space:nowrap}
+.tag.atb{background:var(--ok-weak);color:var(--ok);border-color:transparent}
+.tag.ce{background:var(--danger-weak);color:var(--danger);border-color:transparent}
+.tag.prn{background:var(--accent-weak);color:var(--accent);border-color:transparent}
+.rx-note{font-size:12.5px;margin-top:6px;color:var(--warn)}
+.rx-ctl{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden;height:34px}
+.step button{border:0;background:none;width:32px;height:100%;font-size:17px;color:var(--muted);line-height:1}
+.step button:hover{background:var(--surface-2);color:var(--ink)}
+.step output{min-width:78px;text-align:center;font-size:13.5px;font-variant-numeric:tabular-nums;padding:0 2px}
+.step output b{font-weight:650}
+.alt-h{padding:10px 18px;background:var(--surface-2);font-size:12.5px;color:var(--muted);border-top:1px solid var(--line-2);font-weight:600}
+
+.free{display:grid;grid-template-columns:1.4fr .8fr auto;gap:8px;padding:12px 18px;border-top:1px solid var(--line-2);background:var(--surface-2)}
+.free input,.free select{height:38px;border:1px solid var(--line);border-radius:9px;background:var(--surface);padding:0 10px;font-size:14px;min-width:0}
+.free .wide{grid-column:1 / -1}
+.free .row2{display:grid;grid-template-columns:auto 1fr auto;gap:8px;grid-column:1 / -1}
+.btn{height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);padding:0 14px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;justify-content:center;white-space:nowrap}
+.btn:hover{border-color:var(--faint)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn svg{width:16px;height:16px}
+
+.chk-list{list-style:none;margin:0;padding:6px 0}
+.chk-list li{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:9px 18px;cursor:pointer;font-size:14.5px}
+.chk-list li.off span{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--line)}
+.sub-h{padding:12px 18px 4px;font-size:13px;font-weight:650;color:var(--danger)}
+.addline{display:flex;gap:8px;padding:8px 18px 14px}
+.addline input{flex:1;height:38px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);padding:0 10px;font-size:14px;min-width:0}
+
+.plain{list-style:none;margin:0;padding:8px 0}
+.plain li{padding:8px 18px 8px 38px;position:relative;font-size:14.5px}
+.plain li::before{content:"";position:absolute;left:20px;top:16px;width:6px;height:6px;border-radius:50%;background:var(--faint)}
+.plain.num{counter-reset:n}
+.plain.num li::before{counter-increment:n;content:counter(n);width:auto;height:auto;background:none;top:8px;left:18px;font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums;font-weight:600}
+.blk-note{padding:0 18px 14px;color:var(--muted);font-size:13px}
+.tpl-area{width:100%;min-height:340px;border:0;border-top:1px solid var(--line-2);padding:16px 18px;font-family:var(--mono);font-size:13px;line-height:1.6;background:var(--paper);resize:vertical;outline:none}
+
+/* Welcome */
+.welcome{max-width:560px;margin:8vh auto 0}
+.welcome h1{font-size:32px;letter-spacing:-.02em;line-height:1.1;margin:0 0 10px}
+.welcome p{color:var(--muted);margin:0 0 22px}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 14px;font-size:14px}
+.quick button:hover{border-color:var(--accent);color:var(--accent)}
+.keys{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:8px 12px;font-size:13.5px;color:var(--muted);align-items:center}
+
+/* Output */
+.out-tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
+.out-tabs button{border:0;background:none;padding:9px 12px;font-size:13.5px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.out-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.paper{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
+.paper-h{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;border-bottom:1px solid var(--line-2)}
+.paper-h h4{margin:0;font-size:13px;font-weight:650;flex:1}
+.paper-h h4 small{display:block;font-weight:500;color:var(--danger);font-size:12px}
+.paper pre{margin:0;padding:16px;font-family:var(--mono);font-size:12.2px;line-height:1.65;white-space:pre-wrap;word-break:break-word;overflow-x:auto}
+.out-empty{color:var(--muted);font-size:14px;padding:24px 4px}
+.out-actions{display:flex;flex-direction:column;gap:8px}
+.out-actions .btn{height:46px;font-size:15px}
+.hint{font-size:12.5px;color:var(--faint);margin-top:14px;line-height:1.7}
+.disclaimer{font-size:12px;color:var(--faint);margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:50}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.mbar{display:none}
+
+/* Medium: hide output column, show below */
+@media (max-width:1180px){
+  main.cols{grid-template-columns:280px minmax(0,1fr)}
+  .col-out{display:none}
+  .inline-out{display:block!important}
+}
+.inline-out{display:none;margin-top:8px}
+
+/* Mobile */
+@media (max-width:760px){
+  body{font-size:15px}
+  .shell{height:auto;min-height:100%}
+  main.cols{flex:none}
+  header.top{padding:10px 14px;gap:10px;flex-wrap:wrap}
+  .brand small{display:none}
+  .search{order:3;flex-basis:100%;max-width:none}
+  .search kbd{display:none}
+  .top-tools{margin-left:auto}
+  main.cols{display:block}
+  .col{overflow:visible}
+  .col-list{border-right:0;background:var(--bg)}
+  .col-detail{padding:16px 14px 140px;display:none}
+  body.v-detail .col-list{display:none}
+  body.v-detail .col-detail{display:block}
+  .back{display:inline-flex;margin:0 0 12px -6px;border:0;background:none;color:var(--accent);font-weight:600;align-items:center;gap:4px;padding:6px}
+  .d-head h1{font-size:23px}
+  .rx{grid-template-columns:auto minmax(0,1fr);padding:14px}
+  .rx-ctl{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;margin-top:6px}
+  .blk-h{padding:12px 14px}
+  .chk-list li{padding:9px 14px}
+  .free{grid-template-columns:1fr;padding:12px 14px}
+  .mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));gap:8px}
+  body.v-detail .mbar.has{display:grid;grid-template-columns:1fr 1fr 1fr}
+  .mbar .btn{height:46px;padding:0 8px;font-size:14px}
+  .welcome{display:none}
+  .list{padding:6px 10px 40px}
+  .li{padding:12px 10px;font-size:15.5px;background:var(--surface);margin-bottom:4px;border-radius:12px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand"><div class="rx-mark" aria-hidden="true">℞</div><div><b>Alta PS</b><small>Receita e orientações para copiar e colar</small></div></div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label for="q" class="sr">Buscar diagnóstico</label>
+      <input id="q" type="search" autocomplete="off" placeholder="Buscar diagnóstico, sintoma ou CID">
+      <kbd>/</kbd>
+    </div>
+    <div class="top-tools">
+      <label class="switch" title="Saída em letras maiúsculas"><input type="checkbox" id="upper" checked>MAIÚSCULAS</label>
+    </div>
+  </header>
+  <main class="cols">
+    <nav class="col col-list" aria-label="Diagnósticos"><div class="list" id="list"></div></nav>
+    <div class="col col-detail" id="detail"></div>
+    <aside class="col col-out" id="out" aria-label="Texto para copiar"></aside>
+  </main>
+</div>
+<div class="mbar" id="mbar"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ===== Dados clínicos (baseados no roteiro de condutas do PS) =====
+function M(n, f, v, p, u, d, o) { return Object.assign({ n, f, v, p, u: u || 0, d: d || 0 }, o || {}); }
+const ALT = { alt: 1 };
+
+// Itens recorrentes
+const dip = (o) => M('Dipirona 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre.', 4, 5, Object.assign({ prn: 1 }, o));
+const dip2 = (o) => M('Dipirona 500 mg', 'cp', 'ORAL', 'Tomar 2 comprimidos de 6 em 6 horas, se dor ou febre.', 8, 5, Object.assign({ prn: 1 }, o));
+const parac750 = (o) => M('Paracetamol 750 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre. Não exceder 4 comprimidos ao dia.', 4, 5, Object.assign({ prn: 1 }, o));
+const ibu12 = (o) => M('Ibuprofeno 600 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas, após as refeições, por {d} dias.', 2, 5, o);
+const ibu8 = (o) => M('Ibuprofeno 600 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, após as refeições, por {d} dias.', 3, 5, o);
+const amox8 = (d, o) => M('Amoxicilina 500 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 8 em 8 horas por {d} dias.', 3, d, Object.assign({ atb: 1 }, o));
+const amoxclav875 = (d, o) => M('Amoxicilina + clavulanato de potássio 875 + 125 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas, após as refeições, por {d} dias.', 2, d, Object.assign({ atb: 1 }, o));
+const amoxclav500 = (d, o) => M('Amoxicilina + clavulanato de potássio 500 + 125 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, após as refeições, por {d} dias.', 3, d, Object.assign({ atb: 1 }, o));
+const azi = (d, o) => M('Azitromicina 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia por {d} dias.', 1, d, Object.assign({ atb: 1 }, o));
+const cefalex = (d, o) => M('Cefalexina 500 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 6 em 6 horas por {d} dias.', 4, d, Object.assign({ atb: 1 }, o));
+const lora = (p, d, o) => M('Loratadina 10 mg', 'cp', 'ORAL', p, 1, d, o);
+const pred = (n, d, o) => M('Prednisona 20 mg', 'cp', 'ORAL', 'Tomar ' + (n === 1 ? '1 comprimido' : n + ' comprimidos') + ' 1 vez ao dia, pela manhã, após o café, por {d} dias.', n, d, o);
+const dramin = (n, o) => M('Dimenidrinato + piridoxina (Dramin B6) 50 + 10 mg', 'cp', 'ORAL', 'Tomar ' + (n === 1 ? '1 comprimido' : n + ' comprimidos') + ' de 6 em 6 horas, se náuseas, vômitos ou tontura, por {d} dias.', 4 * n, 3, o);
+const ondan = (o) => M('Ondansetrona 8 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas, se náuseas ou vômitos.', 2, 3, Object.assign({ prn: 1 }, o));
+const meto = (o) => M('Metoclopramida 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, 30 minutos antes das refeições, se náuseas ou vômitos.', 3, 3, Object.assign({ prn: 1 }, o));
+const busco = (o) => M('Escopolamina + dipirona (Buscopan Composto) 10 + 250 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se dor em cólica.', 3, 3, Object.assign({ prn: 1 }, o));
+const simet = (o) => M('Simeticona 75 mg/mL gotas', 'fr', 'ORAL', 'Tomar 16 gotas de 8 em 8 horas por 3 dias.', 0, 0, Object.assign({ q: 1 }, o));
+const sro = (o) => M('Sais para reidratação oral', 'env', 'ORAL', 'Diluir 1 envelope em 1 litro de água filtrada ou fervida e guardar na geladeira (validade de 24 horas). Tomar ½ copo após cada evacuação líquida ou vômito e pequenos goles ao longo do dia.', 0, 0, Object.assign({ q: 5 }, o));
+const ambroxol = (o) => M('Ambroxol xarope adulto 6 mg/mL', 'fr', 'ORAL', 'Tomar 5 mL de 8 em 8 horas por até 10 dias.', 0, 0, Object.assign({ q: 1 }, o));
+const sfNasal = (p, o) => M('Cloreto de sódio 0,9% (soro fisiológico) 500 mL', 'fr', 'NASAL', p || 'Lavar as narinas com 10 mL em cada lado, com seringa, 6 vezes ao dia.', 0, 0, Object.assign({ q: 1 }, o));
+const budNasal = (p, o) => M('Budesonida 32 mcg spray nasal', 'fr', 'NASAL', p || 'Aplicar 2 jatos em cada narina, 1 vez ao dia, pela manhã, por 30 dias.', 0, 0, Object.assign({ q: 1 }, o));
+const lubOc = (p, o) => M('Colírio lubrificante (ex.: Lacrifilm, Systane, Optive, Hyabak)', 'fr', 'OFTÁLMICA', p || 'Pingar 1 gota em cada olho de 6 em 6 horas por 7 dias.', 0, 0, Object.assign({ q: 1 }, o));
+const tramadol = (o) => M('Tramadol 50 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 6 em 6 horas, se dor intensa, por {d} dias.', 4, 3, Object.assign({ ce: 1, prn: 1 }, o));
+const proctyl = (p, o) => M('Policresuleno + cinchocaína (Proctyl) pomada retal', 'tb', 'RETAL', p || 'Aplicar na região anal 3 vezes ao dia até melhora dos sintomas; após, 1 vez ao dia.', 0, 0, Object.assign({ q: 1 }, o));
+const lactulose = (p, o) => M('Lactulose xarope 667 mg/mL', 'fr', 'ORAL', p, 0, 0, Object.assign({ q: 1 }, o));
+
+// Unidade (strings)
+const U = {
+  dipIM: 'Dipirona 500 mg/mL (amp 2 mL) — 1 ampola IM',
+  dipEV: 'Dipirona 500 mg/mL (amp 2 mL) — 1 ampola EV',
+  dexaIM: 'Dexametasona 4 mg/mL (amp 2,5 mL) — 1 ampola IM',
+  dexaEV: 'Dexametasona 4 mg/mL (amp 2,5 mL) — 1 ampola EV',
+  diclofIM: 'Diclofenaco 25 mg/mL (amp 3 mL) — 1 ampola IM',
+  cetoIM: 'Cetoprofeno 50 mg/mL (amp 2 mL) — 1 ampola IM',
+  prometaIM: 'Prometazina 25 mg/mL (amp 2 mL) — 1 ampola IM',
+  metoEV: 'Metoclopramida 5 mg/mL (amp 2 mL) — 1 ampola EV',
+  metoIM: 'Metoclopramida 5 mg/mL (amp 2 mL) — 1 ampola IM',
+  draminEV: 'Dimenidrinato + piridoxina (Dramin B6) 3 mg/mL (amp 10 mL) — 1 ampola EV',
+  buscoEV: 'Escopolamina + dipirona (Buscopan Composto) — 1 ampola EV',
+  sf100: 'SF 0,9% 100 mL — EV lento',
+  tramaEV: 'Tramadol 50 mg/mL (amp 2 mL) — 1 ampola EV + SF 0,9% 100 mL, lento',
+  morfina: 'Morfina 10 mg/mL (amp 1 mL) — diluir 1 ampola em 9 mL de SG 5% e administrar 2 mL EV de 10 em 10 minutos até melhora da dor',
+};
+
+// Orientações/alarme recorrentes
+const RET = 'Retornar ao pronto atendimento se piora ou persistência dos sintomas.';
+const MAOS = 'Lavar as mãos com frequência e não compartilhar objetos de uso pessoal.';
+
+const SYS = [
+  ['geral', 'Dor, febre e sintomas gerais'],
+  ['cabeca', 'Cabeça, olhos, ouvido e garganta'],
+  ['resp', 'Respiratório'],
+  ['gi', 'Gastrointestinal'],
+  ['gu', 'Geniturinário e ginecológico'],
+  ['osteo', 'Osteomuscular e vascular'],
+  ['pele', 'Pele, partes moles e ferimentos'],
+  ['gest', 'Gestantes e lactantes'],
+  ['inter', 'Sala de emergência e internação'],
+  ['modelos', 'Modelos de texto'],
+];
+
+const CONDS = [
+// ============ GERAL ============
+{ id: 'dor-leve', sys: 'geral', t: 'Dor aguda leve a moderada', cid: [['R52.0', 'Dor aguda'], ['R52.9', 'Dor não especificada']], syn: 'analgesia dor analgesico',
+  unid: [U.dipIM, U.dexaIM, U.diclofIM, U.cetoIM], unidNota: 'Escolher conforme o caso.',
+  casa: [dip(), parac750(ALT)],
+  ori: ['Repouso relativo e boa hidratação.', 'Não usar outros analgésicos ou anti-inflamatórios por conta própria.'],
+  alarm: ['Dor que piora mesmo com a medicação.', 'Febre persistente por mais de 48 horas.', 'Surgimento de novos sintomas.'] },
+
+{ id: 'dor-intensa', sys: 'geral', t: 'Dor aguda intensa', cid: [['R52.0', 'Dor aguda']], syn: 'opioide codeina tramadol morfina analgesia forte',
+  unid: [U.tramaEV, U.morfina],
+  casa: [M('Paracetamol + codeína (Tylex) 500 + 30 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas, se dor intensa, por {d} dias.', 2, 3, { ce: 1, prn: 1 }),
+    M('Trometamol cetorolaco (Toragesic) 10 mg', 'cp', 'SUBLINGUAL', 'Dissolver 1 comprimido embaixo da língua de 8 em 8 horas por {d} dias.', 3, 5),
+    tramadol(ALT)],
+  ori: ['A medicação pode causar sonolência: não dirigir nem operar máquinas.', 'Não ingerir bebidas alcoólicas durante o tratamento.', 'Pode causar constipação: aumentar a ingestão de água e fibras.'],
+  alarm: ['Dor que não melhora com a medicação.', 'Vômitos persistentes.', 'Sonolência excessiva ou dificuldade para respirar.'] },
+
+{ id: 'nausea', sys: 'geral', t: 'Náuseas e vômitos', cid: [['R11', 'Náusea e vômitos']], syn: 'enjoo vomito nausea emese',
+  unid: [U.draminEV.replace('EV', 'EV') + ' + SF 0,9% 250 mL, EV lento', 'Ondansetrona 2 mg/mL (amp 4 mL) + SF 0,9% 250 mL — EV lento', U.prometaIM, 'Se componente ansioso: diazepam 5 mg VO (1 cp) ou clonazepam 0,5 mg VO (2 cp)', 'Cateter de O2 2 L/min se SpO2 < 92%'],
+  casa: [dramin(2), ondan(ALT), meto(ALT)],
+  ori: ['Fracionar a alimentação: pequenas quantidades várias vezes ao dia.', 'Hidratar-se com pequenos goles frequentes de água, soro caseiro ou soro de reidratação.', 'Evitar alimentos gordurosos e muito condimentados.', 'A medicação pode causar sonolência.'],
+  alarm: ['Vômitos persistentes que impedem a ingestão de líquidos.', 'Sinais de desidratação: boca seca, sede intensa, pouca urina, tontura.', 'Vômito com sangue ou com aspecto de borra de café.', 'Dor abdominal intensa.'] },
+
+{ id: 'alergia', sys: 'geral', t: 'Alergia / urticária', cid: [['T78.4', 'Alergia não especificada'], ['L50.9', 'Urticária não especificada']], syn: 'urticaria prurido coceira reacao alergica',
+  unid: [U.prometaIM, 'Se necessário: ' + U.dexaIM],
+  casa: [lora('Tomar 1 comprimido 1 vez ao dia por {d} dias.', 7), pred(1, 5),
+    M('Fexofenadina (Allegra) 120 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia por {d} dias.', 1, 5, ALT),
+    M('Prometazina 25 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se coceira, por {d} dias.', 3, 5, { alt: 1, prn: 1 })],
+  ori: ['Evitar contato com o agente suspeito (alimento, medicamento, cosmético).', 'Informar esta alergia em todos os atendimentos médicos.', 'Banhos mornos; evitar coçar.'],
+  alarm: ['Inchaço de lábios, língua, rosto ou garganta.', 'Falta de ar, chiado no peito ou rouquidão.', 'Tontura, desmaio ou palpitação.', 'Vômitos ou dor abdominal intensa.'] },
+
+{ id: 'dengue', sys: 'geral', t: 'Dengue (grupo A)', cid: [['A90', 'Dengue clássico']], syn: 'arbovirose febre chikungunya zika',
+  casa: [dip(), M('Bromoprida 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se náuseas ou vômitos.', 3, 5, { prn: 1 }), sro(), lora('Tomar 1 comprimido 1 vez ao dia, se coceira.', 5, { prn: 1 })],
+  fix: 'Removida a orientação de dipirona “até de 3 em 3 horas”: mantido intervalo de 6 em 6 horas.',
+  ori: ['Beber bastante líquido: pelo menos 3 litros ao dia (água, soro, sucos, água de coco).', 'NÃO tomar AAS (aspirina), ibuprofeno, diclofenaco, nimesulida ou outro anti-inflamatório.', 'Não tomar nenhuma outra medicação sem orientação médica.', 'Repouso.', 'Retornar para reavaliação no dia em que a febre passar (fase de maior risco), mesmo se estiver bem.'],
+  alarm: ['Dor abdominal intensa e contínua.', 'Vômitos persistentes.', 'Sangramento de gengiva, nariz, urina ou fezes.', 'Tontura ao levantar ou desmaio.', 'Sonolência, irritabilidade ou confusão.', 'Diminuição da urina.', 'Falta de ar ou inchaço.'] },
+
+{ id: 'insolacao', sys: 'geral', t: 'Insolação / queimadura solar', cid: [['T67.0', 'Insolação'], ['L55.9', 'Queimadura solar']], syn: 'sol calor queimadura solar',
+  casa: [M('Loção de calamina (Caladryl)', 'fr', 'TÓPICA', 'Aplicar na região afetada 3 vezes ao dia por 5 dias.', 0, 0, { q: 1 }), dip()],
+  ori: ['Evitar exposição ao sol, principalmente entre 10 e 16 horas.', 'Usar protetor solar e roupas leves e folgadas.', 'Hidratação vigorosa: beber bastante água.', 'Compressas frias na pele afetada.'],
+  alarm: ['Febre alta, confusão mental ou desmaio.', 'Bolhas extensas na pele.', 'Vômitos persistentes ou diminuição da urina.'] },
+
+{ id: 'alcool', sys: 'geral', t: 'Álcool: intoxicação e abstinência', cid: [['F10.0', 'Intoxicação alcoólica aguda'], ['F10.3', 'Síndrome de abstinência']], syn: 'alcoolismo etilismo embriaguez abstinencia bebida',
+  variants: [
+    { name: 'Intoxicação', unid: ['Tiamina 100 mg — 1 ampola EV (antes ou junto da glicose)', 'SG 5% 500 mL + complexo B — EV em 1 hora'] },
+    { name: 'Abstinência', unid: ['Prometazina 25 mg — 1 ampola IM', 'Haloperidol 5 mg — 1 ampola IM, se agitação'], notes: ['Na abstinência alcoólica, o benzodiazepínico é a primeira escolha; haloperidol isolado reduz o limiar convulsivo.'] }],
+  ori: ['Não ingerir bebidas alcoólicas.', 'Procurar a UBS ou o CAPS-AD para acompanhamento.'],
+  alarm: ['Tremores intensos, alucinações ou confusão.', 'Convulsão.', 'Vômitos com sangue.'] },
+
+// ============ CABEÇA / OLHOS / ORL ============
+{ id: 'cefaleia', sys: 'cabeca', t: 'Cefaleia / enxaqueca', cid: [['R51', 'Cefaleia'], ['G43.9', 'Enxaqueca'], ['G44.2', 'Cefaleia tensional']], syn: 'dor de cabeca enxaqueca migranea tensional',
+  unid: [U.dipEV, U.dexaEV, U.metoEV + ' (ou ' + U.draminEV.split(' — ')[0] + ' — 1 ampola EV)', U.sf100, 'Reavaliar em 1 hora'],
+  variants: [
+    { name: 'Tensional', notes: ['Tensional: bilateral, em aperto/pressão, sem piora com atividade física.'],
+      casa: [dip({ p: 'Tomar 1 comprimido de 6 em 6 horas, se dor.' }), dramin(1, { alt: 1 })] },
+    { name: 'Enxaqueca', notes: ['Enxaqueca: unilateral, pulsátil, piora com movimento, náusea/foto/fonofobia. Investigar aura e uso de anticoncepcional.', 'Triptanos: evitar se doença vascular, HAS não controlada, gestação ou aura prolongada.'],
+      casa: [dip({ p: 'Tomar 1 comprimido de 6 em 6 horas, se dor.' }), dramin(1),
+        M('Dipirona + isometepteno + cafeína (Neosaldina)', 'drg', 'ORAL', 'Tomar 1 a 2 drágeas de 6 em 6 horas, se dor, até melhora. Não exceder 6 drágeas ao dia.', 6, 3, { alt: 1, prn: 1 }),
+        M('Naratriptana (Naramig) 2,5 mg', 'cp', 'ORAL', 'Tomar 1 comprimido no início da crise. Se a dor voltar, pode repetir após 4 horas (máximo 2 comprimidos ao dia).', 0, 0, { q: 4, alt: 1, fix: 'O roteiro trazia “Naramig 25, 1 cp ao dia por 3 dias”: a apresentação é 2,5 mg, de uso na crise.' }),
+        M('Ergotamina + cafeína + dipirona (Cefaliv)', 'cp', 'ORAL', 'Tomar 1 comprimido no início da crise; pode repetir após 30 minutos. Máximo 4 comprimidos ao dia.', 0, 0, { q: 6, alt: 1 }),
+        M('Mesilato de di-hidroergotamina + dipirona + cafeína (Cefalium)', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se dor, até melhora.', 3, 3, { alt: 1, prn: 1 })] }],
+  ori: ['Manter sono regular, alimentação em horários fixos e boa hidratação.', 'Evitar uso de analgésicos por mais de 10 dias no mês (risco de cefaleia por uso excessivo).', 'Anotar os episódios de dor (diário de cefaleia) e levar à consulta na UBS.'],
+  alarm: ['Dor de cabeça súbita e muito intensa (“a pior da vida”).', 'Febre com rigidez de nuca ou manchas na pele.', 'Fraqueza, formigamento, alteração da fala ou da visão.', 'Confusão, sonolência ou convulsão.', 'Dor que piora progressivamente ou após trauma na cabeça.'] },
+
+{ id: 'salvas', sys: 'cabeca', t: 'Cefaleia em salvas', cid: [['G44.0', 'Cefaleia em salvas']], syn: 'cluster cefaleia trigeminal',
+  unid: ['O2 a 100% 12 a 15 L/min em máscara não reinalante por 15 a 20 minutos, paciente sentado', 'Sumatriptano 25 mg — 1 cp VO; repetir em 2 horas se refratário (contraindicado se < 18 ou > 65 anos ou evento vascular prévio)'],
+  fix: 'O roteiro indicava O2 5 L/min; o efeito abortivo exige alto fluxo (12 a 15 L/min).',
+  casa: [M('Mesilato de di-hidroergotamina + dipirona + cafeína (Cefalium)', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor, até melhora.', 4, 3, { prn: 1 })],
+  ori: ['Encaminhado ao neurologista para tratamento preventivo.', 'Evitar bebidas alcoólicas durante o período de crises.'],
+  alarm: ['Fraqueza, formigamento, alteração da fala ou da visão.', 'Dor de padrão diferente do habitual.', 'Febre ou rigidez de nuca.'] },
+
+{ id: 'vertigem', sys: 'cabeca', t: 'Vertigem / labirintite', cid: [['H81.1', 'Vertigem paroxística benigna'], ['H83.0', 'Labirintite'], ['H81.3', 'Outras vertigens periféricas']], syn: 'tontura labirintite vppb meniere neurite vestibular',
+  unid: ['Realizar HINTS para afastar vertigem central', U.draminEV + ' + SF 0,9% 100 mL, EV lento', 'Ou: ' + U.prometaIM],
+  variants: [
+    { name: 'Crise aguda', casa: [dramin(2), ondan()] },
+    { name: 'Periférica (VPPB, Ménière, neurite)', casa: [
+      M('Meclizina 25 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se tontura.', 3, 5, { prn: 1, fix: 'Posologia padronizada (o roteiro trazia “1 cp até de 6/6h por dia”).' }),
+      M('Betaistina 24 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 30, ALT)] }],
+  ori: ['Levantar-se devagar e sentar-se ao sentir tontura.', 'Não dirigir nem trabalhar em altura até melhora.', 'Buscar atendimento ambulatorial com otorrinolaringologista ou fisioterapia para avaliação de manobra de Epley.'],
+  alarm: ['Fraqueza, formigamento ou alteração da fala.', 'Visão dupla, dificuldade para andar ou engolir.', 'Dor de cabeça intensa ou perda súbita da audição.', 'Vômitos que não param.'] },
+
+{ id: 'conjuntivite', sys: 'cabeca', t: 'Conjuntivite', cid: [['H10.9', 'Conjuntivite não especificada'], ['H10.0', 'Conjuntivite mucopurulenta']], syn: 'olho vermelho conjuntivite colirio secrecao',
+  variants: [
+    { name: 'Viral', casa: [lubOc()],
+      ori: ['Lavar os olhos com soro fisiológico 0,9% várias vezes ao dia.', 'Compressas frias sobre os olhos (no máximo 10 minutos por vez).', 'Lavar rosto e mãos com água e sabão com frequência; não compartilhar toalhas, fronhas e maquiagem.', 'Evitar aglomerações; usar óculos escuros se incômodo com a luz.', 'Não usar lentes de contato até a melhora.', 'Se não houver melhora em 7 dias, procurar oftalmologista.'] },
+    { name: 'Bacteriana', casa: [
+      M('Ciprofloxacino 0,3% colírio', 'fr', 'OFTÁLMICA', 'Pingar 1 gota no olho afetado de 6 em 6 horas por 5 dias.', 0, 0, { q: 1, atb: 1, fix: 'Preferida a apresentação sem corticoide (Maxiflox D contém dexametasona).' }),
+      lubOc(),
+      M('Ofloxacino 0,3% colírio', 'fr', 'OFTÁLMICA', 'Pingar 1 gota no olho afetado de 6 em 6 horas por 7 dias.', 0, 0, { q: 1, atb: 1, alt: 1 }),
+      M('Tobramicina 0,3% colírio', 'fr', 'OFTÁLMICA', 'Pingar 1 gota no olho afetado de 4 em 4 horas por 7 dias.', 0, 0, { q: 1, atb: 1, alt: 1 })],
+      ori: ['Lavar os olhos com soro fisiológico 0,9% antes de pingar o colírio.', 'Compressas frias sobre os olhos (no máximo 10 minutos por vez).', 'Lavar rosto e mãos com água e sabão com frequência; não compartilhar toalhas, fronhas e maquiagem.', 'Não usar lentes de contato até a melhora.', 'Se não houver melhora em 4 dias, procurar oftalmologista.'] }],
+  alarm: ['Dor intensa no olho.', 'Baixa da visão ou visão embaçada que não melhora ao piscar.', 'Sensibilidade intensa à luz.', 'Inchaço e vermelhidão das pálpebras com febre.'] },
+
+{ id: 'ce-ocular', sys: 'cabeca', t: 'Corpo estranho ocular', cid: [['T15.9', 'Corpo estranho na parte externa do olho']], syn: 'cisco olho abrasao cornea',
+  unid: ['Lavagem abundante com SF 0,9%', 'Avaliar córnea (fluoresceína, se disponível) e remover o corpo estranho'],
+  casa: [M('Tobramicina 0,3% colírio', 'fr', 'OFTÁLMICA', 'Pingar 1 gota no olho afetado de 6 em 6 horas por 7 dias.', 0, 0, { q: 1, atb: 1, fix: 'O roteiro indicava tobramicina + dexametasona; corticoide tópico deve ser evitado se houver lesão de córnea.' }), dip()],
+  ori: ['Não coçar nem esfregar o olho.', 'Usar óculos de proteção em atividades de risco.'],
+  alarm: ['Baixa da visão.', 'Dor progressiva ou secreção purulenta.', 'Sem melhora em 48 horas: procurar oftalmologista.'] },
+
+{ id: 'tersol', sys: 'cabeca', t: 'Terçol (hordéolo)', cid: [['H00.0', 'Hordéolo']], syn: 'tercol hordeolo calazio palpebra',
+  casa: [],
+  ori: ['Compressa de água morna sobre a pálpebra por 15 minutos, de 3 em 3 horas, até desaparecer.', 'Não espremer a lesão.', 'Não usar maquiagem na região até a melhora.'],
+  alarm: ['Inchaço e vermelhidão que se espalham pela pálpebra ou rosto.', 'Febre.', 'Alteração da visão.'] },
+
+{ id: 'hiposfagma', sys: 'cabeca', t: 'Hiposfagma', cid: [['H11.3', 'Hemorragia conjuntival']], syn: 'olho vermelho sangue derrame olho hemorragia subconjuntival',
+  notes: ['Causas comuns: hipertensão, trauma ocular, tosse ou vômito (Valsalva). Aferir a PA e testar a acuidade visual.'],
+  casa: [lubOc('Pingar 1 gota no olho afetado de 6 em 6 horas, se desconforto.')],
+  ori: ['Compressa fria para alívio do desconforto.', 'A mancha costuma desaparecer espontaneamente em 1 a 2 semanas.', 'Controlar a pressão arterial na UBS.'],
+  alarm: ['Dor no olho ou baixa da visão.', 'Recorrência frequente ou sangramentos em outros locais.'] },
+
+{ id: 'oftalmo', sys: 'cabeca', t: 'Olho vermelho doloroso / baixa visual súbita', cid: [['H57.1', 'Dor ocular'], ['H53.1', 'Distúrbio visual subjetivo']], syn: 'glaucoma uveite trauma ocular baixa acuidade',
+  notes: ['Baixa de acuidade visual súbita ou trauma ocular: avaliação oftalmológica imediata (descolamento de retina, oclusão vascular, glaucoma agudo).', 'Olho vermelho com dor: considerar glaucoma agudo, uveíte, ceratite. Lubrificante e compressa fria aliviam, mas não substituem o diagnóstico.'],
+  casa: [], ori: ['Encaminhado para avaliação oftalmológica imediata.'], alarm: ['Piora da dor ou da visão no trajeto: procurar emergência oftalmológica.'] },
+
+{ id: 'oma', sys: 'cabeca', t: 'Otite média aguda', cid: [['H66.9', 'Otite média não especificada']], syn: 'ouvido dor de ouvido otalgia',
+  unid: [U.diclofIM + ' (ou ' + U.dipIM + ')'],
+  casa: [amox8(10), ibu12(), dip(ALT), amoxclav500(7, ALT), azi(5, ALT)],
+  ori: ['Não colocar objetos, hastes ou líquidos no ouvido.', 'Completar todo o tratamento com antibiótico, mesmo se melhorar.'],
+  alarm: ['Febre persistente após 72 horas de antibiótico.', 'Dor, inchaço ou vermelhidão atrás da orelha.', 'Rigidez de nuca, confusão ou dor de cabeça intensa.', 'Paralisia do rosto ou tontura intensa.'] },
+
+{ id: 'oe', sys: 'cabeca', t: 'Otite externa', cid: [['H60.9', 'Otite externa não especificada']], syn: 'ouvido de nadador otite externa',
+  casa: [M('Ciprofloxacino + hidrocortisona (Otociriax) solução otológica', 'fr', 'OTOLÓGICA', 'Pingar 3 gotas no ouvido afetado de 12 em 12 horas por 7 dias.', 0, 0, { q: 1, atb: 1 }), dip(), amox8(10, ALT), cefalex(7, ALT)],
+  ori: ['Proteger o ouvido da água durante o banho com algodão (pode umedecer com vaselina).', 'Não usar hastes flexíveis.'],
+  alarm: ['Febre ou inchaço que se espalha pelo rosto ou pescoço.', 'Dor muito intensa (atenção especial em diabéticos).', 'Sem melhora em 72 horas.'] },
+
+{ id: 'sinusite', sys: 'cabeca', t: 'Sinusite', cid: [['J01.9', 'Sinusite aguda não especificada']], syn: 'rinossinusite sinusite seios da face',
+  variants: [
+    { name: 'Viral', casa: [dip(), ibu8(), ambroxol(), sfNasal(), budNasal()] },
+    { name: 'Bacteriana', casa: [amox8(10), dip(), ibu8(), ambroxol(), sfNasal(), budNasal(), amoxclav875(10, ALT), azi(5, ALT)] }],
+  ori: ['Beber bastante líquido para fluidificar a secreção.', 'Inalação com vapor de água morna.', 'Dormir com a cabeceira elevada.'],
+  alarm: ['Inchaço ou vermelhidão ao redor dos olhos.', 'Alteração da visão.', 'Dor de cabeça intensa ou rigidez de nuca.', 'Febre alta persistente.'] },
+
+{ id: 'amigdalite', sys: 'cabeca', t: 'Amigdalite bacteriana', cid: [['J03.9', 'Amigdalite aguda não especificada']], syn: 'garganta faringite faringoamigdalite dor de garganta',
+  unid: [U.dexaIM, U.dipIM, 'Penicilina G benzatina 1.200.000 UI + 4 mL de água destilada — IM, dose única'],
+  notes: ['Penicilina benzatina em dose única OU amoxicilina por 10 dias — não associar.'],
+  fix: 'Duração da amoxicilina ajustada para 10 dias (erradicação do estreptococo).',
+  casa: [amox8(10), ibu12(), dip(), M('Hexomedine spray', 'fr', 'TÓPICA (OROFARINGE)', 'Aplicar 3 jatos na garganta de 6 em 6 horas por 3 dias, se dor ao engolir.', 0, 0, { q: 1 }),
+    amoxclav875(10, ALT), azi(5, ALT),
+    M('Nimesulida 100 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas, após as refeições, por {d} dias.', 2, 5, ALT),
+    M('Diclofenaco sódico 50 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, após as refeições, por {d} dias.', 3, 5, ALT)],
+  ori: ['Completar todo o tratamento com antibiótico, mesmo se melhorar.', 'Alimentos frios e pastosos podem aliviar a dor.', MAOS],
+  alarm: ['Dificuldade para abrir a boca ou engolir a saliva.', 'Voz abafada, falta de ar ou inchaço no pescoço.', 'Febre persistente após 72 horas de antibiótico.'] },
+
+{ id: 'rinite', sys: 'cabeca', t: 'Rinite alérgica', cid: [['J30.4', 'Rinite alérgica não especificada']], syn: 'alergia nariz espirro coriza',
+  unid: [U.dexaIM],
+  casa: [lora('Tomar 1 comprimido 1 vez ao dia, à noite, por {d} dias.', 10), pred(1, 5),
+    budNasal('Aplicar 1 a 2 jatos em cada narina, 1 vez ao dia, pela manhã, por 30 dias.', { fix: 'Frequência padronizada (o roteiro trazia “12 em 12 horas pela manhã”).' })],
+  ori: ['Manter o ambiente arejado e evitar poeira, mofo, fumaça e perfumes.', 'Lavar roupas de cama semanalmente; evitar tapetes e bichos de pelúcia no quarto.', 'Lavagem nasal com soro fisiológico.'],
+  alarm: ['Falta de ar ou chiado no peito.'] },
+
+{ id: 'soluco', sys: 'cabeca', t: 'Crise de soluços', cid: [['R06.6', 'Soluço']], syn: 'soluco singulto',
+  unid: [U.metoIM + ' (ou ' + U.prometaIM + ')'],
+  casa: [M('Metoclopramida 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas por {d} dias.', 3, 5)],
+  ori: ['Evitar bebidas gaseificadas e refeições volumosas.'],
+  alarm: ['Soluço que persiste por mais de 48 horas.', 'Dor no peito, falta de ar ou vômitos.', 'Fraqueza, alteração da fala ou da visão.'] },
+
+// ============ RESPIRATÓRIO ============
+{ id: 'gripe', sys: 'resp', t: 'Síndrome gripal / resfriado', cid: [['J00', 'Nasofaringite aguda'], ['J11.1', 'Influenza com manifestações respiratórias']], syn: 'gripe resfriado tosse coriza ivas nasofaringite',
+  variants: [
+    { name: 'Tosse seca', casa: [dip({ p: 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre, por até 5 dias.' }), ibu8(), lora('Tomar 1 comprimido 1 vez ao dia, à noite, por {d} dias.', 5),
+      M('Dropropizina xarope adulto 3 mg/mL', 'fr', 'ORAL', 'Tomar 10 mL de 6 em 6 horas, se tosse, por 5 dias.', 0, 0, { q: 1 }), sfNasal('Lavar as narinas com 10 mL em cada lado, com seringa, várias vezes ao dia.'),
+      pred(1, 5, ALT), M('Prometazina 25 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas por {d} dias.', 3, 5, ALT),
+      M('Dexclorfeniramina 2 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas por {d} dias.', 3, 7, ALT)] },
+    { name: 'Tosse produtiva', casa: [dip2(), ibu8(), lora('Tomar 1 comprimido 1 vez ao dia, à noite, por {d} dias.', 5), ambroxol(),
+      M('Acetilcisteína 600 mg', 'env', 'ORAL', 'Diluir 1 envelope em ½ copo de água e tomar pela manhã por {d} dias.', 1, 5, ALT)] },
+    { name: 'Tosse pós-infecciosa', notes: ['Pode durar até 12 semanas; diagnóstico clínico com exame físico normal.'], casa: [
+      M('Levodropropizina (Percof) xarope 6 mg/mL', 'fr', 'ORAL', 'Tomar 10 mL de 8 em 8 horas por 5 dias.', 0, 0, { q: 1 }),
+      M('Codeína (Codein) xarope 3 mg/mL', 'fr', 'ORAL', 'Tomar 7,5 mL de 8 em 8 horas, se tosse, por no máximo 5 a 7 dias.', 0, 0, { q: 1, ce: 1, alt: 1 }),
+      M('Brometo de ipratrópio (Atrovent N) 0,25 mg/mL gotas', 'fr', 'INALATÓRIA', 'Fazer nebulização com 20 gotas + 5 mL de soro fisiológico 0,9% de 12 em 12 horas.', 0, 0, { q: 1 })] }],
+  ori: ['Repouso e boa hidratação.', 'Lavar as mãos com frequência e cobrir boca e nariz ao tossir ou espirrar.', 'Usar máscara em contato com outras pessoas, principalmente idosos e gestantes.'],
+  alarm: ['Falta de ar ou cansaço aos pequenos esforços.', 'Dor no peito.', 'Febre por mais de 3 dias ou que volta após melhora.', 'Lábios ou dedos arroxeados.', 'Confusão ou sonolência excessiva.'] },
+
+{ id: 'asma', sys: 'resp', t: 'Asma — crise', cid: [['J45.9', 'Asma não especificada']], syn: 'broncoespasmo chiado bombinha crise asmatica',
+  unid: ['O2 para SpO2 > 92% (adultos) e > 95% (crianças)', 'Salbutamol 100 mcg spray com espaçador — 4 a 8 jatos de 20 em 20 minutos por 1 hora', 'Prednisolona 40 mg VO (efeito em 3 a 4 horas) OU hidrocortisona 100 mg — 2 ampolas EV + 20 mL AD, lento (se instabilidade ou sinais de IRpA)', 'Refratária: hidrocortisona 500 mg EV; sulfato de magnésio 2 g EV em 20 minutos; terbutalina 0,5 ampola SC; discutir com a sala de emergência'],
+  casa: [M('Salbutamol (Aerolin) 100 mcg spray', 'fr', 'INALATÓRIA', 'Inalar 2 a 4 jatos com espaçador de 4 em 4 horas, se falta de ar ou chiado.', 0, 0, { q: 1 }), pred(2, 5),
+    M('Dipropionato de beclometasona (Clenil HFA) 250 mcg spray', 'fr', 'INALATÓRIA', 'Inalar 2 jatos com espaçador de 12 em 12 horas até reavaliação com especialista. Enxaguar a boca após o uso.', 0, 0, { q: 1, alt: 1 }),
+    M('Brometo de ipratrópio (Atrovent) 0,25 mg/mL gotas', 'fr', 'INALATÓRIA', 'Fazer nebulização com 5 mL de soro fisiológico 0,9% + 40 gotas de Atrovent + 4 gotas de Berotec, de 4 em 4 horas, por 5 dias.', 0, 0, { q: 1, alt: 1 }),
+    M('Bromidrato de fenoterol (Berotec) 5 mg/mL gotas', 'fr', 'INALATÓRIA', 'Usar 4 gotas na nebulização junto com o Atrovent, conforme descrito acima.', 0, 0, { q: 1, alt: 1 })],
+  ori: ['Usar a bombinha sempre com espaçador; agitar antes de cada jato.', 'Evitar fumaça, poeira, mofo, perfumes e animais com pelo.', 'Agendar consulta na UBS ou com pneumologista para tratamento de manutenção.'],
+  alarm: ['Falta de ar que não melhora com a bombinha.', 'Precisar da bombinha em intervalos menores que 4 horas.', 'Dificuldade para falar frases completas.', 'Lábios arroxeados ou sonolência.'] },
+
+{ id: 'dpoc', sys: 'resp', t: 'DPOC exacerbada', cid: [['J44.1', 'DPOC com exacerbação aguda']], syn: 'dpoc enfisema bronquite cronica exacerbacao',
+  fix: 'CID corrigido para J44.1 (o roteiro trazia J20.9, bronquite aguda) e prednisona para 40 mg/dia (dose de exacerbação).',
+  unid: ['O2 para SpO2 entre 88% e 92%', 'Salbutamol 100 mcg spray — 6 jatos de 20 em 20 minutos por 1 hora', 'Hidrocortisona 100 mg — 2 ampolas EV + 20 mL AD, lento', 'Refratário: hidrocortisona 500 mg EV; terbutalina 0,5 ampola SC; discutir com a sala de emergência'],
+  casa: [amoxclav500(10), pred(2, 5), azi(5, ALT),
+    M('Dipropionato de beclometasona (Clenil HFA) 250 mcg spray', 'fr', 'INALATÓRIA', 'Inalar 2 jatos com espaçador de 12 em 12 horas até retorno com especialista. Enxaguar a boca após o uso.', 0, 0, { q: 1 }),
+    M('Brometo de ipratrópio (Atrovent) 0,25 mg/mL gotas', 'fr', 'INALATÓRIA', 'Fazer nebulização com 5 mL de soro fisiológico 0,9% + 30 gotas de Atrovent + 8 gotas de Berotec, de 6 em 6 horas, por 5 dias.', 0, 0, { q: 1 }),
+    M('Bromidrato de fenoterol (Berotec) 5 mg/mL gotas', 'fr', 'INALATÓRIA', 'Usar 8 gotas na nebulização junto com o Atrovent, conforme descrito acima.', 0, 0, { q: 1 }),
+    M('Salbutamol (Aerolin) 100 mcg spray', 'fr', 'INALATÓRIA', 'Se crise, inalar 4 a 6 jatos com espaçador de 20 em 20 minutos por até 1 hora. Se persistir, retornar imediatamente ao pronto-socorro.', 0, 0, { q: 1 })],
+  ori: ['Parar de fumar e evitar ambientes com fumaça.', 'Manter vacinação contra gripe e pneumonia em dia.', 'Agendar retorno com pneumologista ou na UBS.'],
+  alarm: ['Febre, aumento da secreção ou secreção amarelada/esverdeada.', 'Falta de ar crescente ou esforço para respirar.', 'Sonolência, confusão ou lábios arroxeados.'] },
+
+{ id: 'pac', sys: 'resp', t: 'Pneumonia comunitária', cid: [['J18.9', 'Pneumonia não especificada']], syn: 'pneumonia pac curb65 infeccao pulmonar',
+  notes: ['CURB-65 (confusão, ureia > 40, FR ≥ 30, PAS < 90 ou PAD ≤ 60, idade ≥ 65): 0–1 ambulatorial · 2 considerar internação · ≥ 3 internação/UTI.', 'Solicitar RX de tórax PA + perfil, hemograma, PCR, função renal e eletrólitos; O2 se SpO2 < 92%.', 'Internação: ceftriaxona 1 g EV 12/12h + azitromicina 500 mg/dia (ou claritromicina 500 mg EV 12/12h); alternativa levofloxacino 750 mg EV 1x/dia.', 'Risco de Pseudomonas (bronquiectasia, internação recente, ATB amplo espectro em 30 dias, corticoide crônico, neutropenia): cefepime ou imipenem ± ciprofloxacino.'],
+  fix: 'Levofloxacino padronizado em 750 mg 1 vez ao dia (o roteiro trazia “1x/dia 12/12h”).',
+  variants: [
+    { name: 'Sem comorbidades', casa: [amox8(10), dip(), azi(5, ALT), amoxclav875(7, ALT)] },
+    { name: 'Com comorbidades', casa: [amoxclav875(7), azi(5), dip()] },
+    { name: 'Alérgico a betalactâmico', casa: [M('Levofloxacino 750 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia por {d} dias.', 1, 7, { atb: 1 }), dip()] }],
+  ori: ['Completar todo o tratamento com antibiótico, mesmo se melhorar.', 'Repouso e boa hidratação.', 'Retornar para reavaliação em 48 a 72 horas.'],
+  alarm: ['Falta de ar ou piora do cansaço.', 'Confusão mental ou sonolência.', 'Febre persistente após 72 horas de antibiótico.', 'Dor no peito.', 'Vômitos que impeçam tomar a medicação.'] },
+
+// ============ GASTRO ============
+{ id: 'afta', sys: 'gi', t: 'Afta', cid: [['K12.0', 'Estomatite aftosa recidivante']], syn: 'afta estomatite boca ulcera oral',
+  casa: [M('Triancinolona (Omcilon-A Orabase) pomada', 'tb', 'TÓPICA (BUCAL)', 'Aplicar uma pequena quantidade sobre a lesão 3 vezes ao dia, após as refeições.', 0, 0, { q: 1 }),
+    M('Nistatina suspensão oral 100.000 UI/mL', 'fr', 'ORAL', 'Diluir 1 colher de chá em ½ copo de água e fazer bochechos 4 vezes ao dia.', 0, 0, { q: 1, alt: 1 })],
+  ori: ['Evitar alimentos ácidos, picantes ou muito quentes.', 'Higiene bucal com escova macia.'],
+  alarm: ['Lesão que não cicatriza em 2 semanas.', 'Febre ou múltiplas lesões.', 'Dificuldade para engolir ou se alimentar.'] },
+
+{ id: 'dispepsia', sys: 'gi', t: 'Dispepsia / gastrite / DRGE', cid: [['K30', 'Dispepsia'], ['K29.1', 'Outras gastrites agudas'], ['K21.9', 'DRGE sem esofagite']], syn: 'gastrite azia queimacao refluxo epigastralgia h pylori',
+  unid: [U.buscoEV, U.draminEV, 'SF 0,9% 100 ou 250 mL — EV lento'],
+  variants: [
+    { name: 'Dispepsia / gastrite', casa: [M('Omeprazol 20 mg', 'caps', 'ORAL', 'Tomar 1 cápsula 1 vez ao dia, em jejum, 30 minutos antes do café da manhã, por {d} dias.', 1, 30),
+      M('Hidróxido de alumínio 230 mg comprimido mastigável', 'cp', 'ORAL', 'Mastigar 1 comprimido 1 hora após as refeições e ao deitar (até 4 vezes ao dia), se queimação.', 4, 7, { prn: 1 }), busco()] },
+    { name: 'DRGE', casa: [M('Omeprazol 20 mg', 'caps', 'ORAL', 'Tomar 1 cápsula 1 vez ao dia, em jejum, 30 minutos antes do café da manhã, por {d} dias.', 1, 30),
+      M('Domperidona 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 15 a 30 minutos antes do café, almoço e jantar por {d} dias.', 3, 7, { alt: 1, fix: 'O roteiro trazia domperidona 1 mg/mL 20 gotas (≈ 1 mg); padronizado para 10 mg por dose.' })],
+      ori: ['Elevar a cabeceira da cama.', 'Não deitar nas 2 a 3 horas após as refeições.', 'Evitar café, refrigerantes, álcool, chocolate, frituras e alimentos ácidos.', 'Fazer refeições menores e mais frequentes; não fumar.'] },
+    { name: 'Erradicação H. pylori', casa: [M('Omeprazol 20 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 12 em 12 horas, em jejum, antes do café e do jantar, por {d} dias.', 2, 14),
+      M('Amoxicilina 500 mg', 'caps', 'ORAL', 'Tomar 2 cápsulas de 12 em 12 horas por {d} dias.', 4, 14, { atb: 1 }),
+      M('Claritromicina 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 14, { atb: 1 })],
+      ori: ['Tomar todas as medicações pelo tempo completo, mesmo que melhore.', 'Pode haver gosto metálico na boca e fezes amolecidas.', 'Não ingerir bebidas alcoólicas durante o tratamento.'] }],
+  ori: ['Evitar café, álcool, frituras, alimentos ácidos e muito condimentados.', 'Não usar anti-inflamatórios (ibuprofeno, diclofenaco, nimesulida) sem orientação médica.', 'Fazer refeições menores e mais frequentes.'],
+  alarm: ['Vômito com sangue ou com aspecto de borra de café.', 'Fezes pretas e pastosas (como borra de café).', 'Dificuldade para engolir ou perda de peso.', 'Dor intensa e súbita na barriga ou que irradia para as costas.'] },
+
+{ id: 'hda', sys: 'gi', t: 'Hemorragia digestiva alta — alta pós-EDA', added: 1, cid: [['K92.2', 'Hemorragia gastrointestinal não especificada'], ['K92.0', 'Hematêmese'], ['K92.1', 'Melena']], syn: 'hda melena hematemese sangramento digestivo ulcera peptica eda',
+  notes: ['Condição fora do roteiro original, incluída a partir das recomendações para HDA não varicosa após terapia endoscópica. Revisar antes de usar.', 'HDA varicosa: alta conforme hepatologia (betabloqueador, completar 7 dias de antibioticoprofilaxia e programar ligadura elástica).', 'Checar resultado de pesquisa de H. pylori e tratar se positivo.'],
+  casa: [M('Omeprazol 40 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 12 em 12 horas, 30 minutos antes do café e do jantar, por 14 dias. Depois, tomar 1 cápsula 1 vez ao dia, em jejum, por mais 6 semanas.', 0, 0, { q: 70 }),
+    M('Sucralfato 1 g', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, 1 hora antes das refeições e ao deitar, por {d} dias.', 4, 14, ALT)],
+  ori: ['NÃO usar anti-inflamatórios (ibuprofeno, diclofenaco, nimesulida, cetoprofeno) nem AAS sem orientação médica.', 'Para dor ou febre, usar apenas dipirona ou paracetamol.', 'Não ingerir bebidas alcoólicas e não fumar.', 'Dieta leve e fracionada nos primeiros dias.', 'Retorno ambulatorial com gastroenterologista com o resultado da endoscopia e da biópsia.'],
+  alarm: ['Vômito com sangue ou com aspecto de borra de café.', 'Fezes pretas, pastosas e com mau cheiro, ou com sangue vivo.', 'Tontura, desmaio, palpitação ou palidez.', 'Dor abdominal intensa.'] },
+
+{ id: 'dor-abd', sys: 'gi', t: 'Dor abdominal / abdome agudo', cid: [['R10.4', 'Outras dores abdominais'], ['R10.0', 'Abdome agudo']], syn: 'dor na barriga abdome agudo colica abdominal',
+  unid: [U.buscoEV, 'Tramadol 50 mg/mL (amp 2 mL) — 2 ampolas EV + SF 0,9% 100 mL, lento', U.metoEV, 'SF 0,9% 250 mL — EV em 20 minutos', 'Jejum; acesso venoso; analgesia escalonada', 'Avaliar SNG se abdome distendido'],
+  notes: ['Solicitar: hemograma, PCR, bilirrubinas, amilase, lipase, transaminases, ureia, creatinina, eletrólitos e urina 1.', 'Imagem: RX de tórax PA com cúpulas, RX de abdome em pé e deitado, ou TC de abdome conforme suspeita.', 'Mulher em idade fértil: beta-hCG.', 'Avaliação da cirurgia geral se sinais de peritonite.'],
+  casa: [busco()],
+  ori: ['Dieta leve e fracionada.'],
+  alarm: ['Dor que piora ou se localiza (ex.: lado direito inferior).', 'Febre, vômitos persistentes ou barriga endurecida.', 'Parar de evacuar e de eliminar gases.', 'Sangue nas fezes ou no vômito.'] },
+
+{ id: 'flatulencia', sys: 'gi', t: 'Desconforto abdominal / flatulência', cid: [['R14', 'Flatulência e afecções correlatas']], syn: 'gases estufamento distensao flatulencia',
+  casa: [simet()],
+  ori: ['Evitar alimentos que causam gases: feijão, repolho, brócolis, couve-flor, refrigerantes.', 'Comer devagar e em menores quantidades.'],
+  alarm: ['Dor intensa, vômitos ou parada de eliminação de gases e fezes.', 'Sangue nas fezes ou perda de peso.'] },
+
+{ id: 'geca', sys: 'gi', t: 'Gastroenterite / diarreia aguda', cid: [['A09', 'Diarreia e gastroenterite de origem infecciosa presumível']], syn: 'diarreia geca gastroenterite virose intestinal',
+  unid: [U.buscoEV, U.metoEV, U.sf100],
+  variants: [
+    { name: 'Sem sinais de disenteria', casa: [sro(), busco(), simet(), meto(), ondan(ALT),
+      M('Racecadotrila 100 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 8 em 8 horas, se diarreia, por no máximo 3 dias.', 3, 3, { prn: 1, alt: 1 })] },
+    { name: 'Com sangue, muco, pus ou febre', casa: [sro(), busco(),
+      M('Sulfametoxazol + trimetoprima (Bactrim F) 800 + 160 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 5, { atb: 1 }),
+      M('Ciprofloxacino 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 3, { atb: 1, alt: 1 }), meto()],
+      notes: ['Na disenteria, não usar antidiarreicos (racecadotrila, loperamida).'] }],
+  ori: ['Alimentação permitida: soro de reidratação oral, gelatina, bolacha de água e sal ou maisena, polvilho, banana, maçã, pera e goiaba sem casca, sucos de maçã, goiaba ou cenoura, água de coco, sopa, purê de batata, caldo de feijão sem o grão, frango ou carne magra, macarrão sem molho, chá de erva-cidreira.', 'Evitar: doces, chocolate, bolacha recheada, pipoca, bolos, salgadinhos, frituras, mamão, abacate, uva, laranja, iogurte, balas e sorvete.', 'Manter aleitamento materno nas crianças.', 'Lavar as mãos após ir ao banheiro e antes de preparar alimentos.'],
+  alarm: ['Sangue nas fezes ou febre alta.', 'Sinais de desidratação: boca seca, sede intensa, pouca urina, tontura.', 'Vômitos que impedem a hidratação.', 'Dor abdominal intensa.', 'Diarreia por mais de 7 dias.'] },
+
+{ id: 'constipacao', sys: 'gi', t: 'Constipação intestinal', cid: [['K59.0', 'Constipação']], syn: 'intestino preso prisao de ventre constipacao fecaloma',
+  unid: ['Toque retal + RX de abdome', 'Clister glicerinado 500 mL via retal; repetir de 6 em 6 horas se necessário'],
+  casa: [lactulose('Tomar 10 mL de 8 em 8 horas até evacuar; depois, ajustar para 1 evacuação pastosa ao dia.'),
+    M('Óleo mineral', 'fr', 'ORAL', 'Tomar 1 colher de sopa 2 vezes ao dia por até 30 dias.', 0, 0, { q: 1, alt: 1 })],
+  ori: ['Aumentar o consumo de fibras: frutas, verduras, legumes e cereais integrais.', 'Beber pelo menos 2 litros de água por dia.', 'Praticar atividade física.', 'Não adiar a ida ao banheiro quando sentir vontade.'],
+  alarm: ['Dor abdominal intensa ou barriga muito distendida.', 'Vômitos ou parada de eliminação de gases.', 'Sangue nas fezes ou perda de peso.'] },
+
+{ id: 'hemorroida', sys: 'gi', t: 'Doença hemorroidária', cid: [['I84.9', 'Hemorroidas sem complicações']], syn: 'hemorroida hemorroidas anal',
+  casa: [proctyl()],
+  ori: ['Banho de assento com água morna por 15 minutos, 3 vezes ao dia.', 'Ingerir fibras e pelo menos 2 litros de água ao dia.', 'Evitar ficar muito tempo sentado no vaso sanitário e fazer força para evacuar.', 'Higiene com água após evacuar, evitando papel áspero.'],
+  alarm: ['Sangramento em grande quantidade.', 'Dor intensa com nódulo endurecido e arroxeado.', 'Febre.'] },
+
+{ id: 'fissura', sys: 'gi', t: 'Fissura anal', cid: [['K60.0', 'Fissura anal aguda'], ['K60.1', 'Fissura anal crônica']], syn: 'fissura anal dor ao evacuar',
+  variants: [
+    { name: 'Aguda', casa: [lactulose('Tomar 15 mL de 8 em 8 horas; ajustar para 1 evacuação pastosa ao dia.'), proctyl()] },
+    { name: 'Crônica', casa: [lactulose('Tomar 15 mL de 12 em 12 horas; ajustar para 1 evacuação pastosa ao dia.'), proctyl('Aplicar na região anal 3 vezes ao dia por 5 dias.'),
+      M('Nitroglicerina pomada 0,2% (manipulada)', 'tb', 'RETAL', 'Aplicar na borda anal 3 vezes ao dia por 6 semanas.', 0, 0, { q: 1, w: 'Pode causar dor de cabeça.' })] }],
+  ori: ['Banho de assento com água morna por 15 minutos após evacuar.', 'Ingerir fibras e pelo menos 2 litros de água ao dia.', 'Evitar ficar muito tempo sentado no vaso sanitário e fazer força para evacuar.'],
+  alarm: ['Sangramento em grande quantidade.', 'Febre ou saída de pus.', 'Dor que impede evacuar.'] },
+
+{ id: 'parasitose', sys: 'gi', t: 'Parasitose intestinal', cid: [['B82.9', 'Parasitose intestinal não especificada']], syn: 'verme verminose giardia ameba lombriga',
+  casa: [M('Albendazol 400 mg', 'cp', 'ORAL', 'Tomar 1 comprimido em dose única.', 0, 0, { q: 1 }),
+    M('Metronidazol 500 mg', 'cp', 'ORAL', 'Tomar 4 comprimidos juntos, em dose única (total 2 g).', 0, 0, { q: 4, atb: 1, alt: 1, fix: 'Não existe comprimido de 2 g: dose escrita como 4 cp de 500 mg.' }),
+    M('Nitazoxanida 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas, com alimentos, por {d} dias.', 2, 3, ALT)],
+  ori: ['Lavar bem as mãos após ir ao banheiro e antes das refeições.', 'Lavar frutas e verduras; beber água filtrada ou fervida.', 'Manter as unhas curtas.', 'Não ingerir bebidas alcoólicas durante e até 48 horas após o metronidazol.'],
+  alarm: ['Diarreia com sangue ou febre.', 'Dor abdominal intensa ou vômitos persistentes.'] },
+
+// ============ GENITURINÁRIO ============
+{ id: 'cistite', sys: 'gu', t: 'ITU baixa / cistite', cid: [['N30.0', 'Cistite aguda'], ['N39.0', 'Infecção do trato urinário']], syn: 'itu infeccao urinaria cistite disuria ardencia',
+  notes: ['Urina 1 e urocultura se sintomas atípicos ou: diabetes, transplante, rim único, imunossupressão, suspeita de pielonefrite, gestante ou procedimento urológico.', 'Bacteriúria assintomática: tratar apenas em gestantes ou antes de procedimento urológico.'],
+  casa: [M('Nitrofurantoína (Macrodantina) 100 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 6 em 6 horas, com alimentos, por {d} dias.', 4, 7, { atb: 1 }), dip({ p: 'Tomar 1 comprimido de 6 em 6 horas, se dor.' }),
+    M('Ciprofloxacino 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 3, { atb: 1, alt: 1 }),
+    M('Levofloxacino 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia por {d} dias.', 1, 5, { atb: 1, alt: 1 })],
+  ori: ['Beber bastante água ao longo do dia.', 'Não segurar a urina por longos períodos.', 'Urinar após as relações sexuais.', 'Completar todo o tratamento com antibiótico.'],
+  alarm: ['Febre ou calafrios.', 'Dor nas costas (região lombar).', 'Vômitos.', 'Sem melhora em 48 a 72 horas.'] },
+
+{ id: 'pielo', sys: 'gu', t: 'Pielonefrite (ITU alta)', cid: [['N10', 'Nefrite túbulo-intersticial aguda']], syn: 'pielonefrite itu alta febre lombar',
+  unid: ['Ceftriaxona 1 g — 1 a 2 g + SF 0,9% 40 mL EV em 30 minutos (dose de ataque)'],
+  notes: ['Solicitar: USG de rins e vias urinárias, hemograma, PCR, urina 1, urocultura, creatinina e eletrólitos.', 'Duração total do tratamento: 7 a 14 dias. Gestantes: internação.'],
+  casa: [M('Ciprofloxacino 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 7, { atb: 1 }), dip(),
+    M('Levofloxacino 750 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia por {d} dias.', 1, 7, { atb: 1, alt: 1 })],
+  ori: ['Beber bastante água.', 'Completar todo o tratamento com antibiótico.', 'Retornar com os resultados dos exames solicitados.'],
+  alarm: ['Febre que persiste após 72 horas de antibiótico.', 'Vômitos que impedem tomar a medicação.', 'Pressão baixa, tontura, desmaio ou confusão.', 'Diminuição da urina.'] },
+
+{ id: 'colica-renal', sys: 'gu', t: 'Cólica renal', cid: [['N23', 'Cólica nefrética não especificada']], syn: 'calculo renal litiase pedra no rim nefrolitiase',
+  unid: ['Cetoprofeno 100 mg — 1 ampola EV diluída em SF 0,9% 100 mL', U.buscoEV, U.metoEV, U.sf100, 'Dor refratária: ' + U.morfina],
+  notes: ['Solicitar hemograma, ureia, creatinina e urina 1. Encaminhamento ao urologista.'],
+  casa: [M('Tansulosina 0,4 mg', 'caps', 'ORAL', 'Tomar 1 cápsula 1 vez ao dia, após o café da manhã, por {d} dias.', 1, 30), dip(),
+    M('Carisoprodol + paracetamol + diclofenaco (Mioflex-A)', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, após as refeições, por {d} dias.', 3, 3),
+    tramadol({ alt: 1, fix: 'Dose explicitada (o roteiro trazia apenas “tramadol”).' }), dramin(1, { alt: 1, p: 'Tomar 1 comprimido de 8 em 8 horas, se náuseas.', u: 3, prn: 1 })],
+  ori: ['Beber 2 a 3 litros de água por dia.', 'A tansulosina pode causar tontura ao levantar: levantar-se devagar.', 'Agendar consulta com urologista.'],
+  alarm: ['Febre ou calafrios.', 'Dor que não melhora com a medicação.', 'Vômitos persistentes.', 'Parar de urinar.'] },
+
+{ id: 'cervicite', sys: 'gu', t: 'Cervicite / uretrite', cid: [['N72', 'Doença inflamatória do colo do útero'], ['N34.1', 'Uretrites não específicas']], syn: 'ist dst corrimento uretral gonorreia clamidia',
+  fix: 'CID de cervicite corrigido para N72 (N73 é doença inflamatória pélvica).',
+  unid: ['Ceftriaxona 500 mg — IM, dose única'],
+  casa: [M('Azitromicina 500 mg', 'cp', 'ORAL', 'Tomar 2 comprimidos juntos, em dose única.', 0, 0, { q: 2, atb: 1 })],
+  ori: ['As parcerias sexuais também devem ser tratadas.', 'Não ter relações sexuais por 7 dias após o tratamento e até a parceria ser tratada.', 'Usar preservativo em todas as relações.', 'Realizar testagem para HIV, sífilis e hepatites B e C na UBS.'],
+  alarm: ['Dor na parte baixa da barriga ou febre.', 'Dor ou inchaço nos testículos.', 'Persistência do corrimento após o tratamento.'] },
+
+{ id: 'sangr-vaginal', sys: 'gu', t: 'Sangramento uterino anormal', cid: [['N93.9', 'Sangramento anormal do útero ou vagina']], syn: 'sangramento vaginal menorragia hemorragia uterina',
+  unid: ['Ácido tranexâmico 50 mg/mL (amp 5 mL) — 1 ampola EV a 1 mL/min', 'Vitamina K 10 mg/mL — 1 ampola IM', U.cetoIM, 'Beta-hCG; encaminhar ao PS de ginecologia e obstetrícia'],
+  casa: [M('Ácido tranexâmico (Transamin) 250 mg', 'cp', 'ORAL', 'Tomar 2 comprimidos de 6 em 6 horas por {d} dias.', 8, 3), M('Meloxicam 15 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia, após uma refeição, por {d} dias.', 1, 5)],
+  ori: ['Agendar consulta com ginecologista.', 'Anotar a quantidade de absorventes usados por dia.'],
+  alarm: ['Sangramento que encharca mais de 1 absorvente por hora.', 'Tontura, desmaio ou palpitação.', 'Dor intensa ou febre.'] },
+
+{ id: 'vulvovaginite', sys: 'gu', t: 'Vulvovaginites', cid: [['N76.0', 'Vaginite aguda'], ['N77.1', 'Vaginite em doenças classificadas em outra parte']], syn: 'corrimento vaginal candidiase vaginose tricomoniase',
+  variants: [
+    { name: 'Vaginose bacteriana', casa: [M('Metronidazol 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 7, { atb: 1 })], ori: ['Não ingerir bebidas alcoólicas durante e até 48 horas após o tratamento.'] },
+    { name: 'Tricomoníase', casa: [M('Metronidazol 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 7, { atb: 1 })], ori: ['Não ingerir bebidas alcoólicas durante e até 48 horas após o tratamento.', 'As parcerias sexuais também devem ser tratadas; evitar relações até o fim do tratamento.'] },
+    { name: 'Candidíase', casa: [M('Fluconazol 150 mg', 'caps', 'ORAL', 'Tomar 1 cápsula em dose única.', 0, 0, { q: 1 })] }],
+  ori: ['Usar roupas íntimas de algodão e evitar roupas apertadas.', 'Evitar duchas vaginais e sabonetes perfumados na região íntima.', 'Usar preservativo.'],
+  alarm: ['Dor na parte baixa da barriga ou febre.', 'Persistência dos sintomas após o tratamento.'] },
+
+// ============ OSTEOMUSCULAR / VASCULAR ============
+{ id: 'lombalgia', sys: 'osteo', t: 'Lombalgia / cervicalgia / ciatalgia', cid: [['M54.5', 'Dor lombar baixa'], ['M54.2', 'Cervicalgia'], ['M54.3', 'Ciática'], ['M54.1', 'Radiculopatia'], ['M62.6', 'Distensão muscular']], syn: 'dor nas costas lombar coluna ciatico torcicolo dor muscular',
+  variants: [
+    { name: 'Mecânica / muscular', unid: [U.cetoIM + ' OU ' + U.dexaIM, 'Dor incapacitante: dipirona 1 amp EV + tenoxicam 20 mg EV + dexametasona 4 mg EV', 'Refratária: tramadol 2 amp EV + metoclopramida 1 amp EV + SF 0,9% 100 mL, lento'],
+      casa: [M('Carisoprodol + paracetamol + diclofenaco (Mioflex-A)', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, após as refeições, por {d} dias.', 3, 3),
+        M('Ciclobenzaprina 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido antes de dormir por {d} dias.', 1, 5), dip2(),
+        M('Paracetamol 750 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se dor.', 3, 5, { alt: 1, prn: 1 }),
+        M('Diclofenaco + vitaminas B1, B6, B12 (Alginac 1000)', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia, à noite, após o jantar, por {d} dias.', 1, 5, { alt: 1, w: 'Não associar ao Mioflex-A (dois anti-inflamatórios).' })] },
+    { name: 'Radiculopatia', unid: ['Tramadol 50 mg/mL — 1 ampola EV', U.metoEV, 'Betametasona — 1 ampola IM', U.sf100],
+      casa: [M('Carisoprodol + paracetamol + diclofenaco (Mioflex-A)', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, após as refeições, por {d} dias.', 3, 3),
+        M('Ciclobenzaprina 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido antes de dormir por {d} dias.', 1, 5), dip2(),
+        M('Pregabalina 75 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 12 em 12 horas. Ajuste de dose na reavaliação ambulatorial.', 2, 15, { ce: 1, alt: 1 }),
+        M('Dexametasona + vitaminas B1, B6, B12 (Dexa-Citoneurin) injetável', 'amp', 'INTRAMUSCULAR', 'Aplicar 1 ampola IM em dias alternados (ex.: segunda, quarta e sexta).', 0, 0, { q: 3, alt: 1 })] }],
+  ori: ['Compressa morna na região dolorida por até 20 minutos, 3 vezes ao dia.', 'Manter atividades leves; evitar repouso absoluto e carregar peso.', 'A ciclobenzaprina pode causar sonolência: não dirigir após tomar.'],
+  alarm: ['Formigamento ou perda de força nas pernas.', 'Perda do controle da urina ou das fezes.', 'Dormência na região genital ou anal.', 'Febre ou perda de peso.'] },
+
+{ id: 'gota', sys: 'osteo', t: 'Gota — crise aguda', cid: [['M10.9', 'Gota não especificada']], syn: 'gota acido urico artrite gotosa podagra',
+  unid: ['Tramadol 50 mg/mL — 1 ampola EV', U.diclofIM, U.sf100],
+  fix: 'Orientação sobre alopurinol corrigida: não suspender durante a crise se já estiver em uso.',
+  casa: [M('Colchicina 0,5 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 12 em 12 horas por {d} dias.', 2, 3), dip({ p: 'Tomar 1 comprimido de 6 em 6 horas, se dor.' })],
+  ori: ['Se já usa alopurinol, NÃO suspender durante a crise; se não usa, não iniciar agora.', 'Repouso da articulação e compressas frias.', 'Evitar bebidas alcoólicas (principalmente cerveja), carnes vermelhas, vísceras e frutos do mar.', 'Beber bastante água.', 'Agendar consulta ambulatorial para seguimento.'],
+  alarm: ['Febre ou articulação muito quente e vermelha que piora.', 'Diarreia intensa (efeito da colchicina).'] },
+
+{ id: 'edema', sys: 'osteo', t: 'Edema de membros inferiores', cid: [['R60.0', 'Edema localizado']], syn: 'inchaco pernas edema mmii',
+  unid: ['Descartar TVP (escore de Wells)', 'Furosemida 40 mg VO'],
+  casa: [M('Furosemida 40 mg', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia, pela manhã, por {d} dias.', 1, 7)],
+  ori: ['Manter as pernas elevadas ao repousar.', 'Reduzir o sal da alimentação.', 'Agendar consulta na UBS para investigar a causa do inchaço.'],
+  alarm: ['Falta de ar.', 'Dor e inchaço em apenas uma perna.', 'Diminuição da urina.', 'Câimbras, fraqueza ou tontura.'] },
+
+{ id: 'varizes', sys: 'osteo', t: 'Varizes de membros inferiores', cid: [['I83.9', 'Varizes dos membros inferiores']], syn: 'varizes insuficiencia venosa',
+  unid: [U.diclofIM, U.dipIM],
+  casa: [M('Cumarina + troxerrutina (Venalot) 15 + 90 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas por {d} dias.', 3, 30),
+    M('Meia elástica de média compressão (20–30 mmHg)', 'par', 'USO EXTERNO', 'Usar durante o dia e retirar à noite.', 0, 0, { q: 1 })],
+  ori: ['Caminhar diariamente; evitar ficar muito tempo em pé ou sentado.', 'Elevar as pernas ao descansar.', 'Encaminhado ao especialista (angiologia/cirurgia vascular) para seguimento.'],
+  alarm: ['Dor e inchaço súbitos em uma perna.', 'Vermelhidão e calor no trajeto da veia.', 'Sangramento da variz ou ferida na perna.'] },
+
+// ============ PELE ============
+{ id: 'abscesso', sys: 'pele', t: 'Abscesso cutâneo', cid: [['L02.9', 'Abscesso cutâneo, furúnculo e antraz']], syn: 'abscesso furunculo carbunculo pus',
+  notes: ['Drenar se ponto de flutuação, calor local e lesão amolecida.', 'Internar se abscesso pétreo, muito grande, de evolução rápida ou múltiplo: internação padrão + ceftriaxona 2 g 1x/dia + clindamicina 600 mg 6/6h.'],
+  variants: [
+    { name: 'Não flutuante', casa: [cefalex(7), dip()], ori: ['Compressa morna por 20 minutos, 3 a 4 vezes ao dia, até amolecer.', 'Retornar para drenagem quando a lesão amolecer.'] },
+    { name: 'Flutuante (drenado)', unid: ['Drenagem na unidade'], casa: [cefalex(7), dip()], ori: ['Lavar a ferida com água e sabão 2 vezes ao dia e trocar o curativo diariamente.', 'Curativo na UBS conforme orientação.'] }],
+  ori: ['Não espremer a lesão.', MAOS],
+  alarm: ['Febre.', 'Vermelhidão que se espalha ou dor intensa.', 'Lesão endurecida que cresce rapidamente.'] },
+
+{ id: 'celulite', sys: 'pele', t: 'Celulite', cid: [['L03.9', 'Celulite não especificada']], syn: 'celulite infeccao de pele',
+  notes: ['Grave: internação com oxacilina 2 g EV 4/4h ou cefazolina 1 g EV 8/8h por 10 dias.', 'Demarcar as bordas da lesão com caneta para comparar na reavaliação.'],
+  casa: [cefalex(7), dip(), M('Clindamicina 300 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 6 em 6 horas por {d} dias.', 4, 10, { atb: 1, alt: 1 })],
+  ori: ['Manter o membro elevado.', 'Retornar para reavaliação em 48 horas.', 'Hidratar a pele e tratar frieiras entre os dedos.'],
+  alarm: ['Vermelhidão que avança além da marcação.', 'Febre ou calafrios.', 'Bolhas, manchas escuras ou dor desproporcional.'] },
+
+{ id: 'erisipela', sys: 'pele', t: 'Erisipela', cid: [['A46', 'Erisipela']], syn: 'erisipela infeccao de pele perna vermelha',
+  notes: ['Grave: internação com ceftriaxona 1 g EV 1x/dia ou cefazolina 1 g EV 8/8h por 10 dias.'],
+  casa: [amox8(10, { p: 'Tomar 1 cápsula de 6 em 6 horas por {d} dias.', u: 4 }), dip(),
+    M('Eritromicina 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas por {d} dias.', 4, 10, { atb: 1, alt: 1 })],
+  ori: ['Manter o membro elevado.', 'Retornar para reavaliação em 48 horas.', 'Tratar frieiras e feridas nos pés.'],
+  alarm: ['Vermelhidão que se espalha.', 'Febre persistente após 72 horas de antibiótico.', 'Bolhas ou manchas escuras.'] },
+
+{ id: 'impetigo', sys: 'pele', t: 'Impetigo', cid: [['L01.0', 'Impetigo']], syn: 'impetigo crostas',
+  casa: [cefalex(10)],
+  ori: ['Lavar as lesões com água e sabão 2 a 3 vezes ao dia e remover as crostas com delicadeza.', 'Manter as unhas curtas e evitar coçar.', 'Não compartilhar toalhas e roupas.'],
+  alarm: ['Febre.', 'Lesões que se espalham rapidamente.', 'Urina escura ou inchaço no rosto.'] },
+
+{ id: 'furunculo', sys: 'pele', t: 'Furunculose', cid: [['L02.9', 'Abscesso cutâneo, furúnculo e antraz']], syn: 'furunculo furunculose',
+  unid: ['Drenagem, se flutuante'],
+  casa: [cefalex(7), dip()],
+  ori: ['Compressas mornas 3 a 4 vezes ao dia.', 'Não espremer.', MAOS],
+  alarm: ['Febre.', 'Vermelhidão que se espalha.', 'Lesão no rosto com piora rápida.'] },
+
+{ id: 'escabiose', sys: 'pele', t: 'Escabiose', cid: [['B86', 'Escabiose']], syn: 'sarna escabiose coceira noturna',
+  fix: 'Faixas de peso da ivermectina ajustadas à bula (200 mcg/kg); o roteiro indicava 1 cp para 36–50 kg.',
+  variants: [
+    { name: '36–50 kg', casa: [M('Ivermectina 6 mg', 'cp', 'ORAL', 'Tomar 1 comprimido e ½ em dose única. Repetir a mesma dose após 7 dias.', 0, 0, { q: 4 })] },
+    { name: '51–65 kg', casa: [M('Ivermectina 6 mg', 'cp', 'ORAL', 'Tomar 2 comprimidos em dose única. Repetir a mesma dose após 7 dias.', 0, 0, { q: 4 })] },
+    { name: '66–79 kg', casa: [M('Ivermectina 6 mg', 'cp', 'ORAL', 'Tomar 2 comprimidos e ½ em dose única. Repetir a mesma dose após 7 dias.', 0, 0, { q: 6 })] },
+    { name: '≥ 80 kg', casa: [M('Ivermectina 6 mg', 'cp', 'ORAL', 'Tomar 3 comprimidos em dose única. Repetir a mesma dose após 7 dias.', 0, 0, { q: 6 })] }],
+  casaComum: [M('Dexclorfeniramina (Polaramine) 2 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 8 em 8 horas, se coceira, por {d} dias.', 3, 5, { prn: 1 }),
+    M('Permetrina 5% loção', 'fr', 'TÓPICA', 'Aplicar em todo o corpo, do pescoço para baixo, à noite, após o banho; retirar no banho da manhã seguinte. Fazer por 3 noites e repetir após 1 semana.', 0, 0, { q: 1 })],
+  ori: ['Lavar roupas de cama, toalhas e roupas de uso com água quente e passar a ferro.', 'Tratar todas as pessoas da casa ao mesmo tempo, mesmo sem sintomas.', 'A coceira pode persistir por até 2 semanas após o tratamento.'],
+  alarm: ['Feridas com pus, vermelhidão ou febre.'] },
+
+{ id: 'pediculose', sys: 'pele', t: 'Pediculose (piolho)', cid: [['B85.0', 'Pediculose da cabeça']], syn: 'piolho pediculose lendea',
+  fix: 'CID corrigido para B85.0.',
+  casa: [M('Deltametrina shampoo', 'fr', 'TÓPICA', 'Aplicar no couro cabeludo 1 vez ao dia por 4 dias. Repetir após 1 semana.', 0, 0, { q: 1 })],
+  ori: ['Passar pente fino diariamente para retirar lêndeas.', 'Lavar roupas de cama, bonés, pentes e escovas com água quente.', 'Examinar e tratar todas as pessoas da casa.'],
+  alarm: ['Feridas com pus no couro cabeludo ou febre.'] },
+
+{ id: 'sutura', sys: 'pele', t: 'Ferimento suturado', cid: [['T14.1', 'Ferimento de região não especificada'], ['S91.3', 'Ferimento do pé']], syn: 'sutura corte laceracao ferimento pontos',
+  notes: ['Registrar mecanismo do trauma, tempo, descrição da lesão e necessidade de RX.', 'Avaliar vacina antitetânica e profilaxia antirrábica.', 'Técnica: limpeza abundante com SF 0,9% → antissepsia com clorexidina → campos → reparo → curativo → orientações.', 'Antibiótico profilático apenas para feridas contaminadas, mordeduras ou de alto risco.'],
+  evol: 'Paciente na sala de hipodermia com lesão cortante profunda em ___ com cerca de ___ cm, bordas passíveis de aproximação. Não visualizo vasos de maior calibre lacerados nem sangramento ativo importante. Refere ___ há cerca de ___ minutos.\nCD: sutura + curativo + profilaxias.',
+  casa: [dip({ p: 'Tomar 1 comprimido de 6 em 6 horas, se dor.' }), ibu12(), cefalex(5, { alt: 1 })],
+  ori: ['Lavar a ferida com água e sabão ao menos 2 vezes ao dia e trocar o curativo ao menos 1 vez ao dia.', 'Retirada dos pontos em 10 dias na UBS (face: 5 dias; mãos e pés: 10 a 14 dias).', 'Evitar expor a cicatriz ao sol.', 'Manter a vacina antitetânica em dia.'],
+  alarm: ['Vermelhidão, calor, inchaço ou saída de pus.', 'Febre.', 'Abertura dos pontos ou sangramento.'] },
+
+// ============ GESTANTES ============
+{ id: 'g-constipacao', sys: 'gest', t: 'Gestante: constipação', cid: [['K59.0', 'Constipação'], ['O99.6', 'Doenças do aparelho digestivo na gravidez']], syn: 'gestante gravida prisao de ventre',
+  casa: [M('Psyllium (Metamucil)', 'env', 'ORAL', 'Dissolver 1 envelope em 1 copo de água e tomar 1 vez ao dia.', 1, 30),
+    M('Cássia + tamarindo (Tamarine)', 'cp', 'ORAL', 'Tomar 1 comprimido 1 vez ao dia.', 1, 15, ALT),
+    M('Óleo mineral', 'fr', 'ORAL', 'Tomar 20 mL 1 vez ao dia, por curto período.', 0, 0, { q: 1, alt: 1, w: 'Evitar uso prolongado na gestação (reduz absorção de vitaminas).' })],
+  ori: ['Incluir mais fibras: frutas, verduras e cereais integrais.', 'Beber bastante líquido.', 'Atividade física leve, como caminhada, conforme liberação do pré-natal.'],
+  alarm: ['Dor abdominal intensa, sangramento ou perda de líquido pela vagina.', 'Contrações regulares.'] },
+
+{ id: 'g-ressec', sys: 'gest', t: 'Gestante/lactante: ressecamento vaginal', cid: [['N89.8', 'Outros transtornos não inflamatórios da vagina']], syn: 'secura vaginal lubrificante dispareunia',
+  casa: [M('Hidratante vaginal sem hormônio (Hidrafemme ou Lynax)', 'tb', 'VAGINAL', 'Aplicar 3 vezes por semana, à noite, de uso contínuo.', 0, 0, { q: 1 }),
+    M('Gel hidratante vaginal (Vagidrat)', 'tb', 'VAGINAL', 'Aplicar conforme orientação médica.', 0, 0, { q: 1, alt: 1 })],
+  ori: ['Hidratar-se bem.', 'Evitar duchas vaginais e produtos irritantes na região íntima.', 'Lubrificante à base de água pode ajudar nas relações sexuais.'],
+  alarm: ['Sangramento, dor ou corrimento com odor.'] },
+
+{ id: 'g-azia', sys: 'gest', t: 'Gestante: azia / refluxo', cid: [['O26.8', 'Outras afecções especificadas ligadas à gravidez'], ['K21.9', 'DRGE']], syn: 'gestante gravida azia queimacao refluxo',
+  casa: [M('Hidróxido de alumínio suspensão oral', 'fr', 'ORAL', 'Tomar 10 mL de 8 em 8 horas, se queimação.', 0, 0, { q: 1 })],
+  ori: ['Evitar refeições grandes e alimentos ácidos, gordurosos ou picantes.', 'Comer em pequenas quantidades ao longo do dia.', 'Manter-se sentada ou em pé por pelo menos 30 minutos após as refeições.'],
+  alarm: ['Dor forte na boca do estômago com dor de cabeça, visão turva ou inchaço (avaliar pressão).', 'Vômitos persistentes.'] },
+
+{ id: 'g-dor', sys: 'gest', t: 'Gestante: dor e febre', cid: [['R52.9', 'Dor não especificada'], ['R50.9', 'Febre não especificada']], syn: 'gestante gravida dor febre analgesico',
+  casa: [M('Paracetamol 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre.', 4, 5, { prn: 1 })],
+  ori: ['O paracetamol é o analgésico mais seguro na gestação; não usar anti-inflamatórios.', 'Controlar a febre também com compressas mornas e líquidos.', 'Evitar uso excessivo de medicamentos.'],
+  alarm: ['Febre persistente por mais de 48 horas.', 'Dor de cabeça intensa com alteração visual ou inchaço.', 'Sangramento, perda de líquido ou diminuição dos movimentos do bebê.'] },
+
+{ id: 'g-colica', sys: 'gest', t: 'Gestante: cólica e gases', cid: [['R10.4', 'Outras dores abdominais'], ['R14', 'Flatulência']], syn: 'gestante gravida colica gases',
+  casa: [M('Escopolamina + paracetamol (Buscopan Duo) 10 + 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se cólica.', 4, 3, { prn: 1 })],
+  ori: ['Evitar alimentos que causam gases (feijão, brócolis, couve-flor, repolho).', 'Fazer refeições menores e mais frequentes.'],
+  alarm: ['Cólica em ritmo regular (contrações), sangramento ou perda de líquido.', 'Dor que não melhora.'] },
+
+{ id: 'g-nausea', sys: 'gest', t: 'Gestante: náuseas e vômitos', cid: [['O21.0', 'Hiperêmese gravídica leve']], syn: 'gestante gravida enjoo nausea vomito',
+  casa: [M('Dimenidrinato + piridoxina (Dramin B6) 50 + 10 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se náuseas.', 4, 5, { prn: 1 })],
+  ori: ['Comer alimentos leves e evitar jejum prolongado.', 'Preferir alimentos secos, como biscoitos, ao acordar.', 'O gengibre pode ajudar a aliviar as náuseas.'],
+  alarm: ['Vômitos que impedem beber líquidos ou perda de peso.', 'Urina escura ou em pouca quantidade.'] },
+
+{ id: 'g-gripe', sys: 'gest', t: 'Gestante: resfriado / gripe', cid: [['J00', 'Nasofaringite aguda']], syn: 'gestante gravida gripe resfriado tosse',
+  casa: [lora('Tomar 1 comprimido 1 vez ao dia por {d} dias.', 5), ambroxol(), M('Paracetamol 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre.', 4, 5, { prn: 1 }), sfNasal('Lavar as narinas com 10 mL em cada lado, com seringa, várias vezes ao dia.')],
+  ori: ['Manter-se bem hidratada e descansar.', 'Evitar descongestionantes nasais e anti-inflamatórios.', 'Manter a vacina da gripe em dia.'],
+  alarm: ['Falta de ar ou cansaço.', 'Febre persistente por mais de 48 horas.', 'Diminuição dos movimentos do bebê.'] },
+
+{ id: 'g-itu', sys: 'gest', t: 'Gestante: infecção urinária', cid: [['O23.4', 'Infecção do trato urinário na gravidez']], syn: 'gestante gravida itu infeccao urinaria cistite',
+  fix: 'Dose de nitrofurantoína corrigida para 100 mg de 6 em 6 horas (o roteiro trazia 200 mg 2x/dia).',
+  notes: ['Bacteriúria assintomática na gestação deve ser tratada. Pielonefrite na gestação: internação.', 'Urocultura de controle 7 dias após o término do tratamento.'],
+  variants: [
+    { name: 'Até 32 semanas', casa: [M('Nitrofurantoína (Macrodantina) 100 mg', 'caps', 'ORAL', 'Tomar 1 cápsula de 6 em 6 horas, com alimentos, por {d} dias.', 4, 7, { atb: 1 })] },
+    { name: 'Após 32 semanas / lactação', casa: [cefalex(7)] }],
+  casaComum: [M('Paracetamol 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre.', 4, 5, { prn: 1 })],
+  ori: ['Beber bastante água.', 'Não segurar a urina por longos períodos.', 'Repetir a urocultura após o tratamento, conforme o pré-natal.'],
+  alarm: ['Febre, calafrios ou dor nas costas.', 'Contrações, sangramento ou perda de líquido.'] },
+
+{ id: 'g-sinusite', sys: 'gest', t: 'Gestante: sinusite', cid: [['J01.9', 'Sinusite aguda não especificada']], syn: 'gestante gravida sinusite',
+  casa: [amox8(10), M('Paracetamol 500 mg', 'cp', 'ORAL', 'Tomar 1 comprimido de 6 em 6 horas, se dor ou febre.', 4, 5, { prn: 1 }), sfNasal()],
+  ori: ['Aumentar a ingestão de líquidos.', 'Inalação com vapor de água morna.'],
+  alarm: ['Febre persistente, inchaço ao redor dos olhos ou piora dos sintomas.'] },
+
+// ============ INTERNAÇÃO / SALA ============
+{ id: 'i-avc', sys: 'inter', t: 'AVC isquêmico', cid: [['I63.9', 'Infarto cerebral não especificado']], syn: 'avc avci derrame acidente vascular', unitOnly: 1,
+  unid: ['CROSS para clínica médica', 'AAS 100 mg — VO no almoço', 'Sinvastatina 40 mg — VO à noite'],
+  notes: ['Avaliar elegibilidade para trombólise antes de iniciar antiagregação.'] },
+{ id: 'i-iam', sys: 'inter', t: 'Infarto agudo do miocárdio', cid: [['I21.9', 'IAM não especificado']], syn: 'iam infarto sca dor toracica', unitOnly: 1,
+  unid: ['CROSS para cardiologia', 'AAS 300 mg mastigado (ataque) → 100 mg/dia no café da manhã', 'Clopidogrel 300 mg (4 cp de 75 mg) ataque → 75 mg/dia no café da manhã', 'Analgesia com tramadol se necessário'],
+  fix: 'O roteiro trazia clopidogrel 150 mg; padronizado ataque de 300 mg e manutenção de 75 mg/dia.' },
+{ id: 'i-pancreatite', sys: 'inter', t: 'Pancreatite aguda', cid: [['K85.9', 'Pancreatite aguda não especificada']], syn: 'pancreatite amilase lipase', unitOnly: 1,
+  unid: ['CROSS para cirurgia geral', 'Hidratação vigorosa', 'Dieta zero inicialmente', 'Analgesia com tramadol'] },
+{ id: 'i-hiponatremia', sys: 'inter', t: 'Hiponatremia — reposição', cid: [['E87.1', 'Hiposmolalidade e hiponatremia']], syn: 'sodio baixo hiponatremia salina hipertonica', unitOnly: 1,
+  unid: ['Solução: 445 mL de SF 0,9% + 55 mL de NaCl 20% (≈ NaCl 3%)', 'Cada 1 mL/kg eleva o sódio em ≈ 1 mEq/L (ex.: 70 kg → 70 mL eleva 1 mEq)', 'Iniciar ≈ 1 mEq/h e reavaliar, até 300 mL', 'Não ultrapassar elevação de 10 mEq em 24 horas; restante em BIC contínua'],
+  notes: ['Exemplo: 75 kg, Na 116 → 75 mL/h por 4 horas (sobe 4 mEq); depois calcular o que falta para 10 mEq em 24 h e infundir em BIC.'] },
+{ id: 'i-hipercalemia', sys: 'inter', t: 'Hipercalemia (K 5,5–6,0)', cid: [['E87.5', 'Hiperpotassemia']], syn: 'potassio alto hipercalemia', unitOnly: 1,
+  unid: ['ECG', 'Solução polarizante em 1 hora (insulina regular 10 UI + glicose)', 'Furosemida 20 mg — 1 ampola EV em bolus', 'Reavaliar potássio após 1 hora'],
+  fix: 'O roteiro dizia “reavaliar sódio”; corrigido para potássio.',
+  notes: ['Alteração no ECG: gluconato de cálcio 10% 10 mL EV em 10 minutos.'] },
+{ id: 'i-convulsao', sys: 'inter', t: 'Crise convulsiva', cid: [['R56.8', 'Outras convulsões'], ['G40.9', 'Epilepsia não especificada']], syn: 'convulsao crise epileptica status', unitOnly: 1,
+  unid: ['Crise presenciada: diazepam 10 mg EV', 'Pós-ictal: fenitoína 4 ampolas (1.000 mg) + SF 0,9% 250 mL em BIC em 1 hora'] },
+{ id: 'i-sulfatacao', sys: 'inter', t: 'Sulfatação — broncoespasmo', cid: [['J45.9', 'Asma']], syn: 'sulfato de magnesio broncoespasmo', unitOnly: 1,
+  unid: ['Sulfato de magnésio 10% — 2 ampolas de 10 mL (2 g) + SF 0,9% 100 mL, EV em 30 minutos a 1 hora'] },
+{ id: 'i-suicidio', sys: 'inter', t: 'Tentativa de suicídio', cid: [['X84', 'Lesão autoprovocada intencionalmente']], syn: 'suicidio autoextermínio psiquiatria', unitOnly: 1,
+  unid: ['Internação para CROSS de psiquiatria', 'Haloperidol se necessário (agitação psicomotora)', 'Diazepam se necessário (ansiedade sem agitação)', 'Cuidados contínuos e atendimento humanizado, garantindo o maior bem-estar possível dentro dos limites da unidade'],
+  notes: ['Notificação compulsória. Manter acompanhante e ambiente seguro.'] },
+
+// ============ MODELOS ============
+{ id: 'm-anamnese', sys: 'modelos', t: 'Anamnese e exame físico', tpl: 1,
+  text: 'PACIENTE REFERE \n\nNEGA DISPNEIA, FEBRE, SANGRAMENTOS, ALTERAÇÕES INTESTINAIS/URINÁRIAS E SINTOMAS NEUROLÓGICOS. NEGA DEMAIS QUEIXAS OU SINTOMAS.\n\nHISTÓRIA PATOLÓGICA PREGRESSA: \nMEDICAÇÕES: \nALERGIAS: \n\nEXAME FÍSICO\nBEG, LOTE, CORADO, HIDRATADO, ANICTÉRICO, AFEBRIL, ACIANÓTICO, ECG 15\nACV: RCR 2T BNF, SS\nAR: MV + BILATERALMENTE, SRA\nABDOME: FLÁCIDO, RHA +, TIMPÂNICO, INDOLOR, DB NEGATIVO, GIORDANO NEGATIVO\nEXT: MEMBROS SIMÉTRICOS, SEM EDEMA, SEM SINAIS DE TVP, BEM PERFUNDIDAS, TEC < 3 S\n\nHD: \nCD: ' },
+{ id: 'm-reavaliacao', sys: 'modelos', t: 'Reavaliação e alta', tpl: 1,
+  text: 'PACIENTE RETORNA PARA REAVALIAÇÃO, SEM QUEIXAS, MANTENDO-SE ESTÁVEL HEMODINAMICAMENTE, EUPNEICO EM AR AMBIENTE.\nRX DE TÓRAX: \nECG: \n\nCD:\n- PRESCREVO MEDICAÇÃO PARA CASA\n- ORIENTO PACIENTE QUANTO AOS SINAIS E SINTOMAS DE ALARME E RETORNO SE NECESSÁRIO\n- ALTA MÉDICA COM ORIENTAÇÕES GERAIS' },
+{ id: 'm-internacao', sys: 'modelos', t: 'Prescrição de internação padrão', tpl: 1,
+  text: '1. DIETA: (GERAL / ZERO / PARA HAS / PARA DM)\n2. HV: SF 0,9% 250 ML DE 6/6H SE NECESSÁRIO\n3. ANTIBIÓTICO: CEFTRIAXONA 1 G + SF 0,9% 100 ML DE 12/12H\n4. MODIFICADORES: \n5. DIPIRONA 1 AMP EV DE 6/6H SE DOR OU FEBRE\n6. METOCLOPRAMIDA 1 AMP EV DE 8/8H SE NÁUSEAS OU VÔMITOS\n7. GLICOSE 50%: 3 AMP EV SE DEXTRO < 70 MG/DL\n8. INSULINA REGULAR HUMANA: CONFORME PROTOCOLO\n9. CAPTOPRIL 25 MG VO SE PA > 180 X 110 MMHG\n10. OMEPRAZOL 40 MG EV EM JEJUM PELA MANHÃ\n11. OXIGENOTERAPIA: CATETER NASAL 3 L/MIN SE SPO2 < 92%\n12. MEDICAÇÕES DE USO CONTÍNUO: \n13. CUIDADOS GERAIS\n14. CABECEIRA ELEVADA\n15. SINAIS VITAIS DE 6/6H' },
+{ id: 'm-evol-int', sys: 'modelos', t: 'Evolução de internação (D0)', tpl: 1,
+  text: '# D0 (__/__/__)\n# HD: \n# HISTÓRIA PATOLÓGICA PREGRESSA: \n# HISTÓRIA DA DOENÇA ATUAL: \n\nAO EXAME: BEG, CORADO, HIDRATADO, ANICTÉRICO, AFEBRIL, ACIANÓTICO, LÚCIDO E ORIENTADO EM TEMPO E ESPAÇO.\nNEURO: ECG 15, PUPILAS ISOFOTORREAGENTES, SEM DÉFICITS FOCAIS, SEM SINAIS MENÍNGEOS.\nACV: RCR 2T BNF, SS.\nAR: MV + BILATERALMENTE, SRA.\nABDOME: PLANO, FLÁCIDO, RHA +, TIMPÂNICO, INDOLOR À PALPAÇÃO SUPERFICIAL E PROFUNDA, SEM SINAIS DE PERITONITE, DB NEGATIVO, GIORDANO NEGATIVO.\nEXTREMIDADES: SIMÉTRICAS, SEM EDEMA, SEM SINAIS DE TVP, BEM PERFUNDIDAS, TEC < 3 S.\n\n# EXAMES:\n- __/__/__: HB / HT / LEUCO / PQT / PCR / UR / CREAT / NA / K\n- __/__/__: U1: HEM / LEUCO / NITRITO / BAC\n\nCD:\n- INTERNAÇÃO' },
+{ id: 'm-carta-ubs', sys: 'modelos', t: 'Carta para UBS/ESF', tpl: 1,
+  text: 'À UNIDADE BÁSICA DE SAÚDE / ESTRATÉGIA DE SAÚDE DA FAMÍLIA\n\nDECLARO QUE ATENDI O(A) PACIENTE NA DATA QUE CONSTA NESTA CARTA PARA CONDUÇÃO DE QUEIXA DE ____. CONDUZI O CASO COM O QUE JULGUEI NECESSÁRIO DENTRO DO ARSENAL TERAPÊUTICO DISPONÍVEL. O DIAGNÓSTICO DEVE SER ACOMPANHADO PELO MÉDICO ASSISTENTE, A QUEM CABE JULGAR A NECESSIDADE DE ENCAMINHAMENTO AO SERVIÇO ESPECIALIZADO.\n\nGRATO E À DISPOSIÇÃO PARA QUALQUER ESCLARECIMENTO.' },
+{ id: 'm-carta-go', sys: 'modelos', t: 'Carta para PS de ginecologia e obstetrícia', tpl: 1,
+  text: 'AO PRONTO-SOCORRO DE GINECOLOGIA E OBSTETRÍCIA\n\nDECLARO QUE ATENDI A PACIENTE NA DATA QUE CONSTA NESTA CARTA. APÓS AVALIAÇÃO, AS QUEIXAS/DIAGNÓSTICOS SÃO DE ORIGEM GINECOLÓGICA/OBSTÉTRICA, ESTANDO A PACIENTE APTA A SER RECEBIDA NO SERVIÇO ESPECIALIZADO PARA AVALIAÇÃO MAIS ACURADA.\n\nGRATO E À DISPOSIÇÃO PARA QUALQUER ESCLARECIMENTO.' },
+];
+
+</script>
+<script>
+(function(){
+'use strict';
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const store = {
+  get(k, d){ try { const v = localStorage.getItem('altaps:' + k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem('altaps:' + k, JSON.stringify(v)); } catch(e){} }
+};
+const SYSN = Object.fromEntries(SYS);
+const BY = Object.fromEntries(CONDS.map(c => [c.id, c]));
+
+const UNITS = { cp:['comprimido','comprimidos',0], caps:['cápsula','cápsulas',1], drg:['drágea','drágeas',1], env:['envelope','envelopes',0], fr:['frasco','frascos',0], tb:['tubo','tubos',0], amp:['ampola','ampolas',1], par:['par','pares',0] };
+const SHORT = { cp:'cp', caps:'cáps', drg:'drg', env:'env', fr:'fr', tb:'tubo', amp:'amp', par:'par' };
+const VIAS = ['ORAL','SUBLINGUAL','INALATÓRIA','NASAL','OFTÁLMICA','OTOLÓGICA','TÓPICA (OROFARINGE)','TÓPICA (BUCAL)','TÓPICA','RETAL','VAGINAL','INTRAMUSCULAR','USO EXTERNO'];
+const VIAH = { 'ORAL':'Uso oral','SUBLINGUAL':'Uso sublingual','INALATÓRIA':'Uso inalatório','NASAL':'Uso nasal','OFTÁLMICA':'Uso oftálmico','OTOLÓGICA':'Uso otológico','TÓPICA (OROFARINGE)':'Uso tópico (orofaringe)','TÓPICA (BUCAL)':'Uso tópico (bucal)','TÓPICA':'Uso tópico','RETAL':'Uso retal','VAGINAL':'Uso vaginal','INTRAMUSCULAR':'Uso intramuscular','USO EXTERNO':'Uso externo' };
+const VIASHORT = { 'ORAL':'Oral','SUBLINGUAL':'Sublingual','INALATÓRIA':'Inalatório','NASAL':'Nasal','OFTÁLMICA':'Oftálmico','OTOLÓGICA':'Otológico','TÓPICA (OROFARINGE)':'Orofaringe','TÓPICA (BUCAL)':'Bucal','TÓPICA':'Tópico','RETAL':'Retal','VAGINAL':'Vaginal','INTRAMUSCULAR':'IM','USO EXTERNO':'Externo' };
+
+function extenso(n, fem){
+  const u = ['zero','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze','treze','quatorze','quinze','dezesseis','dezessete','dezoito','dezenove'];
+  const t = ['','','vinte','trinta','quarenta','cinquenta','sessenta','setenta','oitenta','noventa'];
+  const h = ['','cento','duzentos','trezentos','quatrocentos','quinhentos','seiscentos','setecentos','oitocentos','novecentos'];
+  const f = w => fem ? w.replace(/^um$/,'uma').replace(/^dois$/,'duas').replace(/entos$/,'entas') : w;
+  if (n === 100) return 'cem';
+  if (n < 20) return f(u[n]);
+  if (n < 100) return f(t[Math.floor(n/10)]) + (n%10 ? ' e ' + f(u[n%10]) : '');
+  if (n < 1000){ const r = n % 100; return f(h[Math.floor(n/100)]) + (r ? ' e ' + extenso(r, fem) : ''); }
+  return String(n);
+}
+function qtyText(n, f){ const U = UNITS[f] || ['unidade','unidades',1]; return n + ' (' + extenso(n, U[2]) + ') ' + (n === 1 ? U[0] : U[1]); }
+
+/* ---------- State ---------- */
+const S = {
+  id: null, vi: 0, items: [], free: [], ori: [], alarm: [], extraOri: [], cidSel: 0, tab: 'receita',
+  upper: store.get('upper', true), favs: store.get('favs', []), recent: store.get('recent', []), query: '', kb: -1
+};
+$('#upper').checked = S.upper;
+
+function variant(c){ return c.variants ? c.variants[S.vi] || c.variants[0] : {}; }
+function merged(c){
+  const v = variant(c);
+  return {
+    casa: [].concat(v.casa || c.casa || [], c.casaComum || []),
+    unid: v.unid || c.unid || [],
+    ori: [].concat(v.ori || [], c.ori || []),
+    alarm: [].concat(v.alarm || [], c.alarm || []),
+    notes: [].concat(c.notes || [], v.notes || [])
+  };
+}
+function initItems(){
+  const c = BY[S.id]; if (!c || c.tpl) return;
+  const m = merged(c);
+  S.items = m.casa.map(it => ({ it, on: !it.alt, d: it.d, q: it.q != null ? it.q : Math.max(1, Math.ceil(it.u * it.d)) }));
+  S.ori = m.ori.map(t => ({ t, on: true }));
+  S.alarm = m.alarm.map(t => ({ t, on: true }));
+}
+function open(id, opts){
+  if (!BY[id]) return;
+  S.id = id; S.vi = 0; S.free = []; S.extraOri = []; S.cidSel = 0;
+  const c = BY[id];
+  const mm = merged(c); S.tab = c.tpl ? 'modelo' : c.unitOnly ? 'unidade' : mm.casa.length ? 'receita' : mm.ori.length ? 'ori' : 'unidade';
+  initItems();
+  S.recent = [id].concat(S.recent.filter(x => x !== id)).slice(0, 6); store.set('recent', S.recent);
+  document.body.classList.add('v-detail');
+  try { history.replaceState(null, '', '#' + id); } catch(e){}
+  renderAll();
+  if (!(opts && opts.keepScroll)) { $('#detail').scrollTop = 0; window.scrollTo(0, 0); }
+}
+
+/* ---------- Text builders ---------- */
+const UP = s => S.upper ? s.toLocaleUpperCase('pt-BR') : s;
+const W = 50;
+function posText(e){ return e.it.p.replace(/\{d\} dias/g, e.d === 1 ? '1 dia' : e.d + ' dias').replace(/\{d\}/g, e.d); }
+function lineFor(i, name, qty){
+  const left = i + '. ' + name + ' ';
+  const right = ' ' + qty;
+  const dots = Math.max(3, W - left.length - right.length);
+  return left + '.'.repeat(dots) + right;
+}
+function rxBlocks(){
+  const on = S.items.filter(e => e.on).map(e => ({ name: e.it.n, v: e.it.v, qty: qtyText(e.q, e.it.f), pos: posText(e), ce: !!e.it.ce }))
+    .concat(S.free.filter(f => f.on && f.name.trim()).map(f => ({ name: f.name, v: f.v, qty: f.qty || '', pos: f.pos || '', ce: false })));
+  const groups = [ { title: 'Receita simples', items: on.filter(x => !x.ce) }, { title: 'Receita de controle especial', sub: 'Emitir em 2 vias (Portaria 344/98)', items: on.filter(x => x.ce) } ];
+  return groups.filter(g => g.items.length).map(g => {
+    let n = 0; const out = [];
+    VIAS.concat(['__other']).forEach(v => {
+      const its = g.items.filter(x => v === '__other' ? !VIAS.includes(x.v) : x.v === v);
+      if (!its.length) return;
+      if (out.length) out.push('');
+      out.push(UP(VIAH[v] || ('Uso ' + v.toLowerCase())) + ':');
+      out.push('');
+      its.forEach(x => { n++; out.push(UP(lineFor(n, x.name, x.qty))); if (x.pos) out.push('   ' + UP(x.pos)); out.push(''); });
+      out.pop();
+    });
+    return { title: g.title, sub: g.sub, text: out.join('\n') };
+  });
+}
+function oriText(){
+  const o = S.ori.filter(x => x.on).map(x => x.t).concat(S.extraOri);
+  const a = S.alarm.filter(x => x.on).map(x => x.t);
+  const out = [];
+  if (o.length){ out.push(UP('Orientações:')); o.forEach(t => out.push('- ' + UP(t))); }
+  if (a.length || o.length){
+    if (out.length) out.push('');
+    out.push(UP('Procurar o pronto-socorro imediatamente em caso de:'));
+    a.forEach(t => out.push('- ' + UP(t)));
+    out.push('- ' + UP('Piora ou persistência dos sintomas.'));
+  }
+  return out.join('\n');
+}
+function unidText(){
+  const c = BY[S.id]; const m = merged(c);
+  if (!m.unid.length) return '';
+  return [UP('Prescrição na unidade:')].concat(m.unid.map((u, i) => (i + 1) + '. ' + UP(u))).join('\n');
+}
+function cdText(){
+  const c = BY[S.id]; const m = merged(c);
+  const cid = (c.cid || [])[S.cidSel];
+  const v = c.variants ? ' — ' + variant(c).name : '';
+  const lines = [];
+  if (c.evol) lines.push(UP(c.evol), '');
+  lines.push(UP('HD: ' + c.t + v + (cid ? ' (CID ' + cid[0] + ')' : '')));
+  lines.push('CD:');
+  if (c.unitOnly){ m.unid.forEach(u => lines.push('- ' + UP(u))); return lines.join('\n'); }
+  if (m.unid.length) lines.push('- ' + UP('Medicado na unidade conforme prescrição'));
+  if (S.items.some(e => e.on) || S.free.some(f => f.on && f.name.trim())) lines.push('- ' + UP('Prescrevo medicação para casa'));
+  lines.push('- ' + UP('Oriento paciente quanto aos sinais e sintomas de alarme e retorno se necessário'));
+  lines.push('- ' + UP('Alta médica com orientações'));
+  return lines.join('\n');
+}
+function allText(){
+  const r = rxBlocks().map(b => b.text).join('\n\n');
+  const o = oriText();
+  return [r, o].filter(Boolean).join('\n\n');
+}
+
+/* ---------- Clipboard ---------- */
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 1600); }
+async function copy(text, label, btn){
+  if (!text){ toast('Nada selecionado para copiar'); return; }
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; } catch(e){}
+  if (!ok){
+    const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch(e){} ta.remove();
+  }
+  toast(ok ? label : 'Não foi possível copiar: selecione o texto manualmente');
+  if (ok && btn){ const h = btn.innerHTML; btn.classList.add('done'); btn.innerHTML = ICON.check + 'Copiado'; setTimeout(() => { btn.classList.remove('done'); btn.innerHTML = h; }, 1300); }
+}
+const ICON = {
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>',
+  star: '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  starO: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+};
+
+/* ---------- Search / list ---------- */
+function score(c, q){
+  const t = norm(c.t), syn = norm(c.syn || ''), cids = (c.cid || []).map(x => norm(x[0])).join(' ');
+  const words = q.split(/\s+/).filter(Boolean);
+  let s = 0;
+  for (const w of words){
+    if (t.startsWith(w)) s += 6; else if (t.split(/[\s\/—-]+/).some(x => x.startsWith(w))) s += 4; else if (t.includes(w)) s += 3;
+    else if (cids.split(' ').some(x => x.startsWith(w.replace(/\s/g, '')))) s += 5;
+    else if (syn.split(' ').some(x => x.startsWith(w))) s += 2; else if (syn.includes(w)) s += 1;
+    else return 0;
+  }
+  return s;
+}
+function results(){
+  const q = norm(S.query.trim());
+  if (!q) return null;
+  return CONDS.map(c => [c, score(c, q)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1] || a[0].t.localeCompare(b[0].t)).map(x => x[0]);
+}
+function liHTML(c){
+  const fav = S.favs.includes(c.id);
+  return '<button class="li' + '" data-id="' + c.id + '"' + (S.id === c.id ? ' aria-current="true"' : '') + '>' + (fav ? '<span class="star" aria-label="favorito">★</span>' : '') + '<span>' + esc(c.t) + '</span>' + (c.cid && c.cid[0] ? '<span class="cid">' + esc(c.cid[0][0]) + '</span>' : '') + '</button>';
+}
+function renderList(){
+  const r = results(); let h = '';
+  if (r){
+    h += '<h3>' + (r.length ? r.length + ' resultado' + (r.length > 1 ? 's' : '') : 'Nenhum resultado') + '</h3>';
+    if (!r.length) h += '<div class="empty-list">Tente o nome do sintoma, uma sigla (ITU, DPOC, HDA) ou o CID.</div>';
+    h += r.map(liHTML).join('');
+  } else {
+    const favs = S.favs.map(id => BY[id]).filter(Boolean);
+    if (favs.length) h += '<h3>Favoritos</h3>' + favs.map(liHTML).join('');
+    const rec = S.recent.map(id => BY[id]).filter(c => c && !S.favs.includes(c.id)).slice(0, 4);
+    if (rec.length) h += '<h3>Recentes</h3>' + rec.map(liHTML).join('');
+    SYS.forEach(([k, name]) => { const cs = CONDS.filter(c => c.sys === k); if (cs.length) h += '<h3>' + esc(name) + '</h3>' + cs.map(liHTML).join(''); });
+  }
+  $('#list').innerHTML = h;
+  markKb();
+}
+function markKb(){
+  const btns = [...document.querySelectorAll('#list .li')];
+  btns.forEach((b, i) => b.classList.toggle('kb', i === S.kb));
+  if (S.kb >= 0 && btns[S.kb]) btns[S.kb].scrollIntoView({ block: 'nearest' });
+}
+
+/* ---------- Detail ---------- */
+function stepHTML(kind, i, val, label){
+  return '<span class="step" data-step="' + kind + '" data-i="' + i + '"><button type="button" data-d="-1" aria-label="Diminuir ' + label + '">−</button><output><b>' + val + '</b> ' + label + '</output><button type="button" data-d="1" aria-label="Aumentar ' + label + '">+</button></span>';
+}
+function rxRow(e, i){
+  const it = e.it, hasD = /\{d\}/.test(it.p) || (it.prn && it.q == null);
+  const tags = '<span class="tags"><span class="tag">' + VIASHORT[it.v] + '</span>' + (it.atb ? '<span class="tag atb">Antimicrobiano · 2 vias</span>' : '') + (it.ce ? '<span class="tag ce">Controle especial</span>' : '') + (it.prn ? '<span class="tag prn">Se necessário</span>' : '') + '</span>';
+  let ctl = '';
+  if (hasD && it.q == null) ctl += stepHTML('d', i, e.d, e.d === 1 ? 'dia' : 'dias');
+  ctl += stepHTML('q', i, e.q, SHORT[it.f] || 'un');
+  return '<div class="rx' + (e.on ? '' : ' off') + '" data-row="' + i + '">' +
+    '<input type="checkbox" class="cb" data-tog="' + i + '" aria-label="Incluir ' + esc(it.n) + '"' + (e.on ? ' checked' : '') + '>' +
+    '<div class="rx-main"><div class="rx-name">' + esc(it.n) + tags + '</div><div class="rx-pos">' + esc(posText(e)) + '</div>' +
+    (it.fix ? '<div class="rx-note">Ajuste: ' + esc(it.fix) + '</div>' : '') + (it.w ? '<div class="rx-note">' + esc(it.w) + '</div>' : '') + '</div>' +
+    '<div class="rx-ctl">' + ctl + '</div></div>';
+}
+function renderDetail(){
+  const el = $('#detail'); const c = BY[S.id];
+  if (!c){
+    const qs = ['cefaleia','pac','cistite','geca','amigdalite','lombalgia','dengue','hda'];
+    el.innerHTML = '<div class="welcome"><h1>Qual o diagnóstico?</h1><p>Escolha a condição para montar a receita de alta e as orientações já padronizadas. Marque, ajuste quantidades e copie para o prontuário.</p><div class="quick">' +
+      qs.map(id => '<button data-id="' + id + '">' + esc(BY[id].t.split(' — ')[0].split(' / ')[0]) + '</button>').join('') + '</div>' +
+      '<div class="keys"><kbd>/</kbd><span>Buscar</span><kbd>↑ ↓</kbd><span>Navegar nos resultados e Enter para abrir</span><kbd>R</kbd><span>Copiar receita</span><kbd>O</kbd><span>Copiar orientações</span><kbd>T</kbd><span>Copiar receita + orientações</span></div></div>';
+    return;
+  }
+  const m = merged(c); const fav = S.favs.includes(c.id);
+  let h = '<button class="back" data-back>‹ Diagnósticos</button>';
+  h += '<div class="d-head"><h1>' + esc(c.t) + '</h1><button class="iconbtn" data-fav aria-pressed="' + fav + '" title="' + (fav ? 'Remover dos favoritos' : 'Adicionar aos favoritos') + '">' + (fav ? ICON.star : ICON.starO) + '</button></div>';
+  h += '<div class="d-sys">' + esc(SYSN[c.sys]) + '</div>';
+  if (c.cid && c.cid.length) h += '<div class="cids">' + c.cid.map((x, i) => '<button class="cidchip" data-cid="' + i + '" aria-pressed="' + (S.cidSel === i) + '" title="Usar na evolução e copiar"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></button>').join('') + '</div>';
+  if (c.added) h += '<div class="banner added">' + ICON.info + '<span>Fora do roteiro original. Incluído para completar o uso no PS: revisar antes de prescrever.</span></div>';
+  if (c.fix) h += '<div class="banner fix">' + ICON.info + '<span>Ajustado em relação ao roteiro: ' + esc(c.fix) + '</span></div>';
+  if (c.variants) h += '<div class="seg" role="group" aria-label="Variante">' + c.variants.map((v, i) => '<button data-vi="' + i + '" aria-pressed="' + (S.vi === i) + '">' + esc(v.name) + '</button>').join('') + '</div>';
+
+  if (c.tpl){
+    h += '<section class="blk"><div class="blk-h"><h2>Modelo</h2><span class="sp"></span><button class="textbtn" data-copy="modelo">Copiar</button></div><textarea class="tpl-area" id="tpl" spellcheck="false">' + esc(c.text) + '</textarea></section>';
+    el.innerHTML = h; return;
+  }
+
+  // Para casa
+  if (S.items.length || !c.unitOnly){
+    const main = S.items.map((e, i) => [e, i]).filter(([e]) => !e.it.alt);
+    const alts = S.items.map((e, i) => [e, i]).filter(([e]) => e.it.alt);
+    const nOn = S.items.filter(e => e.on).length + S.free.filter(f => f.on && f.name.trim()).length;
+    if (!c.unitOnly){
+      h += '<section class="blk"><div class="blk-h"><h2>Receita para casa</h2><span class="count">' + nOn + ' ' + (nOn === 1 ? 'item' : 'itens') + '</span><span class="sp"></span><button class="textbtn" data-copy="receita">Copiar</button></div>';
+      if (!S.items.length && !S.free.length) h += '<div class="blk-note" style="padding-top:14px">Sem medicação no roteiro: a conduta é orientação. Adicione um item se precisar.</div>';
+      h += '<div>' + main.map(([e, i]) => rxRow(e, i)).join('') + '</div>';
+      if (alts.length) h += '<div class="alt-h">Alternativas e substitutos</div><div>' + alts.map(([e, i]) => rxRow(e, i)).join('') + '</div>';
+      h += S.free.map((f, j) => '<div class="rx' + (f.on ? '' : ' off') + '"><input type="checkbox" class="cb" data-ftog="' + j + '"' + (f.on ? ' checked' : '') + ' aria-label="Incluir item livre"><div class="rx-main"><div class="rx-name">' + esc(f.name) + '<span class="tags"><span class="tag">' + VIASHORT[f.v] + '</span><span class="tag">Item livre</span></span></div><div class="rx-pos">' + esc(f.pos) + '</div></div><div class="rx-ctl"><button class="textbtn" data-fdel="' + j + '">Remover</button></div></div>').join('');
+      h += '<div class="free"><input id="fName" placeholder="Medicação e concentração"><input id="fQty" placeholder="Quantidade (ex.: 1 frasco)"><select id="fVia" aria-label="Via">' + VIAS.map(v => '<option value="' + v + '">' + VIASHORT[v] + '</option>').join('') + '</select><input id="fPos" class="wide" placeholder="Posologia (ex.: tomar 1 comprimido de 8 em 8 horas por 5 dias)"><div class="wide" style="display:flex;justify-content:flex-end"><button class="btn" data-fadd>Adicionar à receita</button></div></div>';
+      h += '</section>';
+
+      // Orientações
+      h += '<section class="blk"><div class="blk-h"><h2>Orientações para casa</h2><span class="sp"></span><button class="textbtn" data-copy="ori">Copiar</button></div>';
+      h += '<ul class="chk-list">' + S.ori.map((o, i) => '<li class="' + (o.on ? '' : 'off') + '" data-o="' + i + '"><input type="checkbox" class="cb" tabindex="0"' + (o.on ? ' checked' : '') + ' aria-label="Incluir orientação"><span>' + esc(o.t) + '</span></li>').join('') +
+        S.extraOri.map((t, i) => '<li data-xo="' + i + '"><input type="checkbox" class="cb" checked aria-label="Remover orientação livre"><span>' + esc(t) + '</span></li>').join('') + '</ul>';
+      h += '<div class="addline"><input id="oAdd" placeholder="Acrescentar orientação e Enter"><button class="btn" data-oadd>Adicionar</button></div>';
+      if (S.alarm.length){
+        h += '<div class="sub-h">Sinais de alarme</div><ul class="chk-list">' + S.alarm.map((o, i) => '<li class="' + (o.on ? '' : 'off') + '" data-a="' + i + '"><input type="checkbox" class="cb"' + (o.on ? ' checked' : '') + ' aria-label="Incluir sinal de alarme"><span>' + esc(o.t) + '</span></li>').join('') + '</ul>';
+      }
+      h += '</section>';
+    }
+  }
+  if (m.unid.length){
+    h += '<section class="blk"><div class="blk-h"><h2>' + (c.unitOnly ? 'Conduta e prescrição' : 'Na unidade') + '</h2><span class="sp"></span><button class="textbtn" data-copy="unidade">Copiar</button></div><ol class="plain num">' + m.unid.map(u => '<li>' + esc(u) + '</li>').join('') + '</ol>' + (c.unidNota ? '<div class="blk-note">' + esc(c.unidNota) + '</div>' : '') + '</section>';
+  }
+  if (m.notes.length){
+    h += '<section class="blk"><div class="blk-h"><h2>Notas do roteiro</h2></div><ul class="plain">' + m.notes.map(n => '<li>' + esc(n) + '</li>').join('') + '</ul></section>';
+  }
+  h += '<div class="inline-out" id="inlineOut"></div>';
+  el.innerHTML = h;
+}
+
+/* ---------- Output ---------- */
+function tabsFor(c){
+  if (!c) return [];
+  if (c.tpl) return [['modelo', 'Modelo']];
+  const t = [];
+  if (!c.unitOnly){ t.push(['receita', 'Receita'], ['ori', 'Orientações']); }
+  if (merged(c).unid.length) t.push(['unidade', c.unitOnly ? 'Conduta' : 'Na unidade']);
+  t.push(['cd', 'Evolução']);
+  return t;
+}
+function paper(title, text, key, sub){
+  return '<div class="paper"><div class="paper-h"><h4>' + esc(title) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</h4><button class="btn" data-copy="' + key + '">' + ICON.copy + 'Copiar</button></div><pre>' + esc(text) + '</pre></div>';
+}
+function outHTML(){
+  const c = BY[S.id];
+  if (!c) return '<div class="out-empty">A prévia do texto aparece aqui, já formatada para colar no prontuário.</div>';
+  const tabs = tabsFor(c); if (!tabs.some(t => t[0] === S.tab)) S.tab = tabs[0][0];
+  let h = '<div class="out-tabs" role="tablist">' + tabs.map(([k, l]) => '<button role="tab" data-tab="' + k + '" aria-selected="' + (S.tab === k) + '">' + l + '</button>').join('') + '</div>';
+  if (S.tab === 'receita'){
+    const bl = rxBlocks();
+    if (!bl.length) h += '<div class="out-empty">Nenhuma medicação marcada.</div>';
+    bl.forEach((b, i) => h += paper(b.title, b.text, 'rx' + i, b.sub));
+  } else if (S.tab === 'ori'){
+    const t = oriText(); h += t ? paper('Orientações', t, 'ori') : '<div class="out-empty">Nenhuma orientação marcada.</div>';
+  } else if (S.tab === 'unidade'){
+    h += paper(c.unitOnly ? 'Conduta' : 'Prescrição na unidade', unidText(), 'unidade');
+  } else if (S.tab === 'cd'){
+    h += paper('HD e conduta de alta', cdText(), 'cd');
+  } else if (S.tab === 'modelo'){
+    h += '<div class="out-empty">Edite o modelo ao lado e copie. As alterações valem só para esta cópia.</div>';
+  }
+  if (!c.tpl && !c.unitOnly){
+    h += '<div class="out-actions"><button class="btn primary" data-copy="tudo">' + ICON.copy + 'Copiar receita + orientações</button></div>';
+  }
+  h += '<div class="hint">Atalhos: <kbd>/</kbd> buscar · <kbd>R</kbd> receita · <kbd>O</kbd> orientações · <kbd>T</kbd> tudo</div>';
+  h += '<div class="disclaimer">Suporte à decisão baseado no roteiro de condutas do serviço. Confira alergias, função renal, gestação, interações e doses antes de assinar.</div>';
+  return h;
+}
+function renderOut(){
+  const h = outHTML();
+  $('#out').innerHTML = h;
+  const io = $('#inlineOut'); if (io) io.innerHTML = '<section class="blk" style="padding:16px;background:var(--surface-2)">' + h + '</section>';
+  // mobile bar
+  const c = BY[S.id]; const mb = $('#mbar');
+  if (c && !c.tpl && !c.unitOnly){
+    mb.className = 'mbar has';
+    mb.innerHTML = '<button class="btn primary" data-copy="receita">' + ICON.copy + 'Receita</button><button class="btn" data-copy="ori">Orientações</button><button class="btn" data-copy="tudo">Tudo</button>';
+  } else if (c){
+    mb.className = 'mbar has'; mb.style.gridTemplateColumns = '1fr';
+    mb.innerHTML = '<button class="btn primary" data-copy="' + (c.tpl ? 'modelo' : 'unidade') + '">' + ICON.copy + 'Copiar ' + (c.tpl ? 'modelo' : 'conduta') + '</button>';
+  } else { mb.className = 'mbar'; mb.innerHTML = ''; }
+  if (c && !c.tpl && !c.unitOnly) mb.style.gridTemplateColumns = '';
+}
+function renderAll(){ renderList(); renderDetail(); renderOut(); }
+
+function textFor(key){
+  if (key === 'receita') return [rxBlocks().map(b => (rxBlocks().length > 1 ? UP(b.title) + (b.sub ? ' — ' + UP(b.sub) : '') + '\n\n' : '') + b.text).join('\n\n\n'), 'Receita copiada'];
+  if (key.startsWith('rx')) { const b = rxBlocks()[+key.slice(2)]; return [b ? b.text : '', 'Receita copiada']; }
+  if (key === 'ori') return [oriText(), 'Orientações copiadas'];
+  if (key === 'unidade') return [unidText() || cdText(), 'Prescrição copiada'];
+  if (key === 'cd') return [cdText(), 'Evolução copiada'];
+  if (key === 'tudo') return [allText(), 'Receita e orientações copiadas'];
+  if (key === 'modelo'){ const t = $('#tpl'); return [t ? t.value : BY[S.id].text, 'Modelo copiado']; }
+  return ['', ''];
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('click', ev => {
+  const t = ev.target;
+  const li = t.closest('[data-id]'); if (li){ S.kb = -1; open(li.dataset.id); return; }
+  const cp = t.closest('[data-copy]'); if (cp){ const [txt, lab] = textFor(cp.dataset.copy); copy(txt, lab, cp.classList.contains('btn') ? cp : null); return; }
+  if (t.closest('[data-back]')){ document.body.classList.remove('v-detail'); window.scrollTo(0, 0); return; }
+  if (t.closest('[data-fav]')){ S.favs = S.favs.includes(S.id) ? S.favs.filter(x => x !== S.id) : [S.id].concat(S.favs); store.set('favs', S.favs); renderList(); renderDetail(); renderOut(); return; }
+  const vb = t.closest('[data-vi]'); if (vb){ S.vi = +vb.dataset.vi; S.free = S.free; initItems(); renderDetail(); renderOut(); return; }
+  const cb = t.closest('[data-cid]'); if (cb){ S.cidSel = +cb.dataset.cid; const c = BY[S.id]; copy(c.cid[S.cidSel][0], 'CID copiado'); renderDetail(); renderOut(); return; }
+  const tb = t.closest('[data-tab]'); if (tb){ S.tab = tb.dataset.tab; renderOut(); return; }
+  const st = t.closest('.step button'); if (st){
+    const box = st.closest('.step'); const e = S.items[+box.dataset.i]; const d = +st.dataset.d;
+    if (box.dataset.step === 'd'){ e.d = Math.max(1, Math.min(90, e.d + d)); if (e.it.u) e.q = Math.max(1, Math.ceil(e.it.u * e.d)); }
+    else e.q = Math.max(1, Math.min(999, e.q + d));
+    e.on = true; refreshKeep(); return;
+  }
+  const fd = t.closest('[data-fdel]'); if (fd){ S.free.splice(+fd.dataset.fdel, 1); refreshKeep(); return; }
+  if (t.closest('[data-fadd]')){ addFree(); return; }
+  if (t.closest('[data-oadd]')){ addOri(); return; }
+  const ft = t.closest('[data-ftog]'); if (ft){ const f = S.free[+ft.dataset.ftog]; f.on = !f.on; refreshKeep(); return; }
+  const xo = t.closest('[data-xo]'); if (xo){ S.extraOri.splice(+xo.dataset.xo, 1); refreshKeep(); return; }
+  const o = t.closest('[data-o]'); if (o){ ev.preventDefault(); const x = S.ori[+o.dataset.o]; x.on = !x.on; refreshKeep(); return; }
+  const a = t.closest('[data-a]'); if (a){ ev.preventDefault(); const x = S.alarm[+a.dataset.a]; x.on = !x.on; refreshKeep(); return; }
+  const row = t.closest('[data-row]'); if (row && !t.closest('.rx-ctl')){ ev.preventDefault(); const e = S.items[+row.dataset.row]; e.on = !e.on; refreshKeep(); return; }
+});
+function refreshKeep(){
+  const d = $('#detail'); const st = d.scrollTop, ws = window.scrollY;
+  renderDetail(); renderOut(); renderList();
+  d.scrollTop = st; window.scrollTo(0, ws);
+}
+function addFree(){
+  const n = $('#fName').value.trim(); if (!n){ $('#fName').focus(); return; }
+  S.free.push({ name: n, qty: $('#fQty').value.trim(), v: $('#fVia').value, pos: $('#fPos').value.trim(), on: true });
+  refreshKeep(); toast('Item adicionado');
+}
+function addOri(){ const i = $('#oAdd'); const v = i.value.trim(); if (!v) return; S.extraOri.push(v.replace(/\.?$/, '.')); refreshKeep(); const n = $('#oAdd'); if (n) n.focus(); }
+
+$('#q').addEventListener('input', e => { S.query = e.target.value; S.kb = S.query ? 0 : -1; document.body.classList.remove('v-detail'); renderList(); });
+$('#q').addEventListener('keydown', e => {
+  const btns = [...document.querySelectorAll('#list .li')];
+  if (e.key === 'ArrowDown'){ e.preventDefault(); S.kb = Math.min(btns.length - 1, S.kb + 1); markKb(); }
+  else if (e.key === 'ArrowUp'){ e.preventDefault(); S.kb = Math.max(0, S.kb - 1); markKb(); }
+  else if (e.key === 'Enter'){ const b = btns[Math.max(0, S.kb)]; if (b){ open(b.dataset.id); e.target.blur(); } }
+  else if (e.key === 'Escape'){ e.target.value = ''; S.query = ''; S.kb = -1; renderList(); e.target.blur(); }
+});
+$('#upper').addEventListener('change', e => { S.upper = e.target.checked; store.set('upper', S.upper); renderOut(); });
+document.addEventListener('keydown', e => {
+  const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+  if (e.key === 'Enter' && document.activeElement.id === 'oAdd'){ e.preventDefault(); addOri(); return; }
+  if (e.key === 'Enter' && ['fName','fQty','fPos'].includes(document.activeElement.id)){ e.preventDefault(); addFree(); return; }
+  if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === '/'){ e.preventDefault(); $('#q').focus(); $('#q').select(); return; }
+  const c = BY[S.id]; if (!c) return;
+  const k = e.key.toLowerCase();
+  if (k === 'r' && !c.tpl && !c.unitOnly){ const [t, l] = textFor('receita'); copy(t, l); }
+  else if (k === 'o' && !c.tpl && !c.unitOnly){ const [t, l] = textFor('ori'); copy(t, l); }
+  else if (k === 't' && !c.tpl && !c.unitOnly){ const [t, l] = textFor('tudo'); copy(t, l); }
+});
+
+const start = (location.hash || '').slice(1);
+if (BY[start]) open(start); else renderAll();
+window.addEventListener('hashchange', () => { const id = location.hash.slice(1); if (BY[id] && id !== S.id) open(id); else if (!id){ S.id = null; document.body.classList.remove('v-detail'); renderAll(); } });
+})();
+</script>
+</body>
+</html>
